@@ -1,0 +1,182 @@
+{
+  "_readme": "Add one block per voice. Only profiles with published:true AND consentOnFile:true are shown. Delete the three example profiles once you add real ones. Field guide: _guides/EDITING-THE-SITE.md",
+  "artists": [
+    {
+      "id": "voice-cofounder",
+      "published": true,
+      "consentOnFile": true,
+      "example": false,
+      "name": "smokyDuck Co-founder Voice",
+      "gender": "",
+      "languages": [
+        "Hindi",
+        "Urdu",
+        "English"
+      ],
+      "accents": [
+        "Standard Hindi"
+      ],
+      "characteristics": [],
+      "ageRange": [],
+      "categories": [
+        "TV commercials",
+        "Dubbing",
+        "Animation",
+        "Documentary",
+        "Corporate"
+      ],
+      "bio": "Co-founder and lead voice of smokyDuck: Hindi TV commercials, animation dubbing with every character, YouTube dubbing and Urdu documentary narration.",
+      "photo": "",
+      "samples": [
+        {
+          "title": "Hindi TV commercial",
+          "type": "audio",
+          "url": "https://drive.google.com/uc?export=download&id=1aYvytP4vAUIjfg0VG747nlqy3OVbPJjy"
+        },
+        {
+          "title": "Urdu documentary",
+          "type": "audio",
+          "url": "https://drive.google.com/uc?export=download&id=17WFy3FBjx3PISOpFCyQnqB6qyEfdFSxU"
+        },
+        {
+          "title": "Hindi animation dub: all characters",
+          "type": "video",
+          "url": "https://drive.google.com/file/d/11dyVA39ErhPNSrjjjBdA6TPGRX44MHOi/preview"
+        },
+        {
+          "title": "Hindi TV commercial: navigation app",
+          "type": "video",
+          "url": "https://drive.google.com/file/d/1q2-u1YweeFdak8ubaCl6o2JLgC3BxNTb/preview"
+        }
+      ],
+      "demoDownload": "",
+      "demoAuthorised": false,
+      "availability": "available"
+    },
+    {
+      "id": "voice-01",
+      "published": true,
+      "consentOnFile": true,
+      "example": true,
+      "name": "Voice 01 — replace with artist name",
+      "gender": "Female",
+      "languages": [
+        "Hindi",
+        "English"
+      ],
+      "accents": [
+        "Standard Hindi",
+        "Indian English"
+      ],
+      "characteristics": [
+        "Warm",
+        "Conversational",
+        "Clear"
+      ],
+      "ageRange": [
+        "Adult (30–50)"
+      ],
+      "categories": [
+        "E-learning",
+        "Corporate",
+        "Explainer"
+      ],
+      "bio": "Placeholder profile. Replace with 2–3 sentences about the voice in the artist's own approved wording.",
+      "photo": "",
+      "samples": [
+        {
+          "title": "E-learning narration (Hindi)",
+          "type": "audio",
+          "url": ""
+        }
+      ],
+      "demoDownload": "",
+      "demoAuthorised": false,
+      "availability": "available"
+    },
+    {
+      "id": "voice-02",
+      "published": true,
+      "consentOnFile": true,
+      "example": true,
+      "name": "Voice 02 — replace with artist name",
+      "gender": "Male",
+      "languages": [
+        "Hindi",
+        "Urdu"
+      ],
+      "accents": [
+        "Standard Hindi",
+        "Hindustani"
+      ],
+      "characteristics": [
+        "Deep",
+        "Authoritative",
+        "Cinematic"
+      ],
+      "ageRange": [
+        "Adult (30–50)",
+        "Mature (50+)"
+      ],
+      "categories": [
+        "Advertising",
+        "Documentary",
+        "Dubbing"
+      ],
+      "bio": "Placeholder profile. Replace with approved details only.",
+      "photo": "",
+      "samples": [
+        {
+          "title": "TV commercial (Hindi)",
+          "type": "audio",
+          "url": ""
+        }
+      ],
+      "demoDownload": "",
+      "demoAuthorised": false,
+      "availability": "limited"
+    },
+    {
+      "id": "voice-03",
+      "published": true,
+      "consentOnFile": true,
+      "example": true,
+      "name": "Voice 03 — replace with artist name",
+      "gender": "Female",
+      "languages": [
+        "Hindi",
+        "English",
+        "Marathi"
+      ],
+      "accents": [
+        "Mumbai Hindi",
+        "Neutral English"
+      ],
+      "characteristics": [
+        "Youthful",
+        "Energetic",
+        "Playful"
+      ],
+      "ageRange": [
+        "Young adult (18–30)"
+      ],
+      "categories": [
+        "Animation",
+        "Gaming",
+        "Social ads"
+      ],
+      "bio": "Placeholder profile. Replace with approved details only.",
+      "photo": "",
+      "samples": [
+        {
+          "title": "Animation character reel",
+          "type": "audio",
+          "url": ""
+        }
+      ],
+      "demoDownload": "",
+      "demoAuthorised": false,
+      "availability": "available"
+    }
+  ]
+}

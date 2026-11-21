@@ -1,0 +1,156 @@
+{
+  "_readme": "Portfolio items. 'kind' is 'ab' (raw AI dub vs finished, audio files), 'video' (embed URL) or 'audio'. Set featured:true to show on the home page. Never list a client name without written permission — use a description like 'EdTech platform, India' instead. Guide: _guides/EDITING-THE-SITE.md",
+  "items": [
+    {
+      "id": "ab-elearning",
+      "featured": true,
+      "kind": "ab",
+      "title": "E-learning module: raw AI dub vs finished",
+      "service": "AI-dub finishing",
+      "languages": "English → Hindi",
+      "client": "",
+      "before": "",
+      "after": "",
+      "notes": "PLACEHOLDER — the single most important demo for outreach. Add the raw AI output and your finished version of the same 30–60 second clip."
+    },
+    {
+      "id": "ad-01",
+      "featured": true,
+      "kind": "video",
+      "title": "Hindi TV commercial: sports retail",
+      "service": "Hindi voice-over",
+      "languages": "Hindi",
+      "client": "Co-founder's voice work",
+      "embed": "https://drive.google.com/file/d/1kEafpcjuxHdWgCRQ5Ci6ZZBAfs9CZ73o/preview",
+      "driveCopy": "1kEafpcjuxHdWgCRQ5Ci6ZZBAfs9CZ73o"
+    },
+    {
+      "id": "ad-02",
+      "featured": true,
+      "kind": "video",
+      "title": "Hindi TV commercial: navigation app",
+      "service": "Hindi voice-over",
+      "languages": "Hindi",
+      "client": "Co-founder's voice work",
+      "embed": "https://drive.google.com/file/d/1q2-u1YweeFdak8ubaCl6o2JLgC3BxNTb/preview",
+      "driveCopy": "1q2-u1YweeFdak8ubaCl6o2JLgC3BxNTb"
+    },
+    {
+      "id": "dub-01",
+      "featured": true,
+      "kind": "video",
+      "title": "Hindi animation dub: all characters",
+      "service": "Dubbing",
+      "languages": "Hindi",
+      "client": "Co-founder's voice work",
+      "embed": "https://drive.google.com/file/d/11dyVA39ErhPNSrjjjBdA6TPGRX44MHOi/preview",
+      "driveCopy": "11dyVA39ErhPNSrjjjBdA6TPGRX44MHOi"
+    },
+    {
+      "id": "ad-03",
+      "featured": true,
+      "kind": "video",
+      "title": "Hindi TV commercial: food brand",
+      "service": "Hindi voice-over",
+      "languages": "Hindi",
+      "client": "Co-founder's voice work",
+      "embed": "https://drive.google.com/file/d/12oyhp5wOGRW5wvDL069GVXJG0CKxcWQo/preview",
+      "driveCopy": "12oyhp5wOGRW5wvDL069GVXJG0CKxcWQo"
+    },
+    {
+      "id": "dub-02",
+      "featured": false,
+      "kind": "video",
+      "title": "Hindi YouTube dub: two voices",
+      "service": "Dubbing",
+      "languages": "Hindi",
+      "client": "Co-founder's voice work",
+      "embed": "https://drive.google.com/file/d/1uXp90J0rjS70wwpjU5h_vEN1xJOnfG5L/preview",
+      "driveCopy": "1uXp90J0rjS70wwpjU5h_vEN1xJOnfG5L"
+    },
+    {
+      "id": "ad-04",
+      "featured": false,
+      "kind": "video",
+      "title": "Hindi TV commercial: coffee brand",
+      "service": "Hindi voice-over",
+      "languages": "Hindi",
+      "client": "Co-founder's voice work",
+      "embed": "https://drive.google.com/file/d/1g0O1gKT2n3gporwct5868b-kmXIFq3VQ/preview",
+      "driveCopy": "1g0O1gKT2n3gporwct5868b-kmXIFq3VQ"
+    },
+    {
+      "id": "ad-05",
+      "featured": false,
+      "kind": "video",
+      "title": "Hindi brand film",
+      "service": "Hindi voice-over",
+      "languages": "Hindi",
+      "client": "Co-founder's voice work",
+      "embed": "https://drive.google.com/file/d/1C44KTmLoXLbCokW4a5zg20oY69ZZ8acv/preview",
+      "driveCopy": "1C44KTmLoXLbCokW4a5zg20oY69ZZ8acv"
+    },
+    {
+      "id": "ad-06",
+      "featured": false,
+      "kind": "video",
+      "title": "Hindi corporate film: infrastructure",
+      "service": "Corporate voice-over",
+      "languages": "Hindi",
+      "client": "Co-founder's voice work",
+      "embed": "https://drive.google.com/file/d/1DRnGc6KQrW8-EYAHslc6QVRkC8lRzXiX/preview",
+      "driveCopy": "1DRnGc6KQrW8-EYAHslc6QVRkC8lRzXiX"
+    },
+    {
+      "id": "film-01",
+      "featured": false,
+      "kind": "video",
+      "title": "English-language version: Andaaz",
+      "service": "English voice-over",
+      "languages": "English",
+      "client": "Co-founder's voice work",
+      "embed": "https://drive.google.com/file/d/1rEVwhdBzf7No-FUWXVWs5Z8NEec34ca2/preview",
+      "driveCopy": "1rEVwhdBzf7No-FUWXVWs5Z8NEec34ca2"
+    },
+    {
+      "id": "audio-01",
+      "featured": false,
+      "kind": "audio",
+      "title": "Hindi TV commercial (audio)",
+      "service": "Voice-over",
+      "languages": "Hindi",
+      "client": "Co-founder's voice work",
+      "audio": "https://drive.google.com/uc?export=download&id=1aYvytP4vAUIjfg0VG747nlqy3OVbPJjy",
+      "driveCopy": "1aYvytP4vAUIjfg0VG747nlqy3OVbPJjy"
+    },
+    {
+      "id": "audio-02",
+      "featured": false,
+      "kind": "audio",
+      "title": "Urdu documentary narration",
+      "service": "Voice-over",
+      "languages": "Urdu",
+      "client": "Co-founder's voice work",
+      "audio": "https://drive.google.com/uc?export=download&id=17WFy3FBjx3PISOpFCyQnqB6qyEfdFSxU",
+      "driveCopy": "17WFy3FBjx3PISOpFCyQnqB6qyEfdFSxU"
+    },
+    {
+      "id": "audio-03",
+      "featured": false,
+      "kind": "audio",
+      "title": "Urdu narration",
+      "service": "Voice-over",
+      "languages": "Urdu",
+      "client": "Co-founder's voice work",
+      "audio": "https://drive.google.com/uc?export=download&id=175hojnXUeek0EXleGPIj3DIPLtCsijQ6",
+      "driveCopy": "175hojnXUeek0EXleGPIj3DIPLtCsijQ6"
+    }
+  ],
+  "_privateNotInSite": [
+    {
+      "title": "Hindi feature dub (film rights: keep private unless the rights holder allows a clip)",
+      "driveCopy": "1-O0migOO7P7kHynkXhJQBJRafptWDRFn"
+    }
+  ],
+  "_note": "Embeds point to renamed copies in Yasir's Drive (folder 'smokyDuck — Website samples'). They only play publicly once each file is shared as 'Anyone with the link: Viewer'. Brand names deliberately left out of titles: this is the co-founder's work from before smokyDuck, not studio clients."
+}

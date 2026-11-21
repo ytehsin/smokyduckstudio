@@ -1,0 +1,226 @@
+#!/usr/bin/env python3
+"""smokyDuck — builds the 6 pages + 404. Run: python3 build.py
+Voices and work come from data/*.json, settings from assets/js/config.js."""
+import json, os, html, datetime, re
+OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+BASE = "https://smokyduckstudio.com/"
+TODAY = datetime.date.today().isoformat()
+E = html.escape
+NAV = [("services.html", "Services"), ("voices.html", "Voices"), ("work.html", "Work"), ("contact.html", "Contact")]
+
+ORG = {"@context": "https://schema.org", "@type": "ProfessionalService", "@id": BASE + "#org", "name": "smokyDuck Studio",
+       "url": BASE, "email": "hello@smokyduckstudio.com", "logo": BASE + "assets/img/logo-512.png",
+       "description": "Hindi voice-over, dubbing, translation and subtitling studio.",
+       "areaServed": ["IN", "GB", "US", "AE"], "knowsLanguage": ["hi", "ur", "en"]}
+
+def head(title, desc, path, extra=None, robots="index,follow"):
+    url = BASE + ("" if path == "index.html" else path)
+    ld = [ORG] + (extra or []) if path == "index.html" else (extra or [])
+    ldh = "".join(f'<script type="application/ld+json">{json.dumps(b, ensure_ascii=False)}</script>' for b in ld)
+    return f"""<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{E(title)}</title>
+<meta name="description" content="{E(desc)}">
+<meta name="robots" content="{robots}">
+<link rel="canonical" href="{url}">
+<meta name="theme-color" content="#0a0a0a">
+<meta property="og:type" content="website"><meta property="og:site_name" content="smokyDuck Studio">
+<meta property="og:title" content="{E(title)}"><meta property="og:description" content="{E(desc)}">
+<meta property="og:url" content="{url}"><meta property="og:image" content="{BASE}assets/img/og-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+{ldh}
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="grain" aria-hidden="true"></div><div class="cursor" aria-hidden="true"></div>
+"""
+
+def nav(active):
+    links = "".join(f'<a href="{h}"{" aria-current=page" if h == active else ""}>{t}</a>' for h, t in NAV)
+    mlinks = "".join(f'<a href="{h}">{t}</a>' for h, t in NAV)
+    return f"""<nav class="nav" aria-label="Main"><a class="logo" href="index.html">smoky<span class="d">D</span>uck.</a>
+<div class="links">{links}</div><button class="menu-btn" type="button" aria-expanded="false" aria-controls="mmenu">Menu</button></nav>
+<div class="mmenu" id="mmenu"><a href="index.html">Home</a>{mlinks}</div>
+<main id="main">
+"""
+
+FOOT = """</main>
+<footer id="contact"><div class="wrap">
+<div class="rv"><h2>Ready to<br>go global?</h2>
+<a class="mail u" data-email href="mailto:hello@smokyduckstudio.com">hello@smokyduckstudio.com</a>
+<a class="wa u" data-wa href="#">WhatsApp us →</a></div>
+<div class="foot"><nav><a class="u" data-social="instagram" href="#">Instagram</a><a class="u" data-social="linkedin" href="#">LinkedIn</a><a class="u" data-social="youtube" href="#">YouTube</a><a class="u" href="legal.html">Privacy &amp; Terms</a></nav>
+<span class="c">© <span data-year>2026</span> smokyDuck. All rights reserved.</span></div>
+</div></footer>
+<div class="consent" id="consent" role="dialog" aria-label="Cookies"><p style="margin:0">May we use Google Analytics to see which pages are useful? It sets cookies only if you allow it.</p>
+<button class="btn" data-consent="yes" type="button">Allow</button><button class="btn" data-consent="no" type="button">No thanks</button></div>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/site.js" defer></script>
+<script src="assets/js/data.js" defer></script>
+</body>
+</html>
+"""
+
+def pagehead(label, h1, lede):
+    return f'<header class="head"><div class="wrap rv"><p class="label">( {label} )</p><h1>{h1}</h1><p>{lede}</p></div></header>'
+
+SERVICES = [
+    ("Voice-Over", "Natural Hindi, Urdu and English voices for commercials, e-learning, explainers, documentaries and corporate films. We cast, direct and deliver finished audio.",
+     ["Commercials and brand films", "E-learning and training", "Explainers and corporate", "Documentary narration"]),
+    ("Dubbing", "Hindi dubbing for animation, series, films and YouTube, including human finishing of AI dubs so they sound like they were made in Hindi.",
+     ["Animation and character voices", "Series, film and YouTube", "AI-dub review and re-voice", "Lip-sync where needed"]),
+    ("Translation", "Scripts adapted for the ear, not word-for-word. We translate for timing, tone and audience, whether Hindi or Hinglish.",
+     ["English ⇄ Hindi scripts", "Course and e-learning content", "On-screen text", "Glossaries for consistency"]),
+    ("Subtitling", "Accurate, perfectly timed subtitles and clean transcripts, delivered with your dub or on their own.",
+     ["Hindi and English subtitles", "SRT and VTT files", "Transcription", "Burned-in captions for social"]),
+]
+
+FAQ = [
+    ("How do you price?", "Per finished minute for voice-over and dubbing, per word for translation. Send the script or a clip and we'll quote the same day where we can."),
+    ("How fast can you deliver?", "It depends on length and the number of voices. Short spots can turn around in a day or two. Your quote states the date."),
+    ("Do you use AI?", "Where it saves you time, yes. Every minute is still checked by a native Hindi speaker, and anything that doesn't sound right is re-recorded by a person."),
+    ("Can we start with a short test?", "Yes. A short sample is the best way to agree what good sounds like before a larger project."),
+    ("Will you sign an NDA?", "Yes, before you share any files."),
+    ("Who owns the recordings?", "You do, once paid, for the usage agreed in the quote. We never clone or reuse a voice without the artist's written consent."),
+]
+
+def faq_html(items): return "".join(f"<details><summary>{q}</summary><div><p>{a}</p></div></details>" for q, a in items)
+def faq_ld(items): return {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": re.sub("<[^>]+>", "", a)}} for q, a in items]}
+
+PAGES = {}
+
+PAGES["index.html"] = lambda: head("smokyDuck | Hindi Voice-Over, Dubbing & Translation Studio",
+    "smokyDuck is a Hindi voice-over and dubbing studio. Human voices, translation and subtitles for brands, agencies, e-learning and media.", "index.html") + nav("") + f"""
+<header class="hero"><div class="glow" aria-hidden="true"></div>
+<h1 class="rv">smoky<span class="d">D</span>uck.</h1>
+<p class="tagline rv"><span>Global Voices.</span> <span>Human Craft.</span> <span>AI Speed.</span></p>
+<p class="scroll" aria-hidden="true">Scroll to explore</p></header>
+
+<section class="sec"><div class="wrap statement">
+<p class="label rv">( Who We Are )</p>
+<h2 class="rv">A Hindi voice studio. We bring the world's content to Hindi audiences — and Hindi voices to the world — with dubbing and voice-over that feel native, not translated.</h2>
+</div></section>
+
+<section class="sec light"><div class="wrap">
+<h2 class="big rv">Our Services</h2>
+<div class="rows rv">{"".join(f'<a class="row" href="services.html#{t.lower().replace("-","")}"><span class="n">0{i+1}</span><div><h3>{t}</h3><p>{d}</p></div></a>' for i,(t,d,_) in enumerate(SERVICES))}</div>
+</div></section>
+
+<section class="sec marq"><div class="bg" aria-hidden="true"><span>Human + AI • Human + AI • Human + AI • Human + AI •&nbsp;</span></div>
+<div class="wrap two">
+<div class="rv"><h2>The AI Advantage.</h2><p class="muted" style="font-size:20px;font-weight:300;max-width:440px">AI handles the heavy lifting. Our people handle everything that makes it sound human.</p>
+<a class="btn" href="contact.html" style="margin-top:20px">Start a project</a></div>
+<div class="steps rv">
+<div><h4>1. AI where it helps</h4><p class="muted">Transcripts, first drafts and quick-turnaround dubs.</p></div>
+<div><h4>2. Native ears on every minute</h4><p class="muted">A Hindi speaker checks meaning, names and timing.</p></div>
+<div><h4>3. Human voices where it matters</h4><p class="muted">Anything that sounds flat is re-recorded by a person.</p></div>
+</div></div></section>
+
+<section class="sec" style="padding-top:0"><div class="wrap">
+<p class="label rv">( Our Work )</p>
+<h2 class="rv" style="font-size:clamp(52px,8vw,110px);margin-bottom:64px">Featured <em style="font-style:italic;font-weight:500;color:#5f5f5a">Projects.</em></h2>
+<div data-work="featured"></div>
+<p class="rv" style="margin-top:72px"><a class="btn" href="work.html">All work</a> &nbsp; <a class="btn" href="voices.html">Hear our voices</a></p>
+</div></section>
+""" + FOOT
+
+PAGES["services.html"] = lambda: head("Services | Hindi Voice-Over, Dubbing, Translation & Subtitling | smokyDuck",
+    "Hindi voice-over, dubbing, translation and subtitling from smokyDuck. Native voices, human-checked AI, delivered to your specs.", "services.html", [faq_ld(FAQ)]) + nav("services.html") + \
+    pagehead("Services", "What we <em>do.</em>", "Four services, one standard: it has to sound like it was made in Hindi.") + f"""
+<section class="sec light"><div class="wrap"><div class="rows">
+{"".join(f'<div class="row rv" id="{t.lower().replace("-","")}"><span class="n">0{i+1}</span><div><h3>{t}</h3><p>{d}</p><ul>{"".join(f"<li>{x}</li>" for x in l)}</ul></div></div>' for i,(t,d,l) in enumerate(SERVICES))}
+</div></div></section>
+<section class="sec"><div class="wrap statement">
+<p class="label rv">( Questions )</p>
+<div class="rv">{faq_html(FAQ)}</div>
+</div></section>
+""" + FOOT
+
+PAGES["voices.html"] = lambda: head("Voices | Hindi Voice Artists | smokyDuck",
+    "Listen to smokyDuck's Hindi, Urdu and English voices. Play samples and enquire about any voice.", "voices.html") + nav("voices.html") + \
+    pagehead("Voices", "Our <em>voices.</em>", "Press play. When you hear the one, ask us about it.") + """
+<section class="sec" style="padding-top:64px"><div class="wrap">
+<div class="filters" role="search" aria-label="Filter voices">
+<div><label class="sr" for="f-language">Language</label><select id="f-language"><option value="">All languages</option></select></div>
+<div><label class="sr" for="f-gender">Gender</label><select id="f-gender"><option value="">Any gender</option></select></div>
+<div><label class="sr" for="f-style">Voice</label><select id="f-style"><option value="">Any tone</option></select></div>
+<div><label class="sr" for="f-category">Best for</label><select id="f-category"><option value="">Any project</option></select></div>
+</div>
+<div id="voices"></div>
+<p class="muted rv" style="margin-top:56px">Are you a voice artist? <a class="u" href="contact.html?formType=Artist">Send us your demo.</a></p>
+</div></section>
+<dialog id="voice-dialog" aria-label="Voice profile"><button class="close" type="button" aria-label="Close">×</button><div class="dlg"></div></dialog>
+""" + FOOT
+
+PAGES["work.html"] = lambda: head("Work | Hindi Dubbing & Voice-Over Samples | smokyDuck",
+    "Hindi commercials, animation dubbing, YouTube dubs and narration by the smokyDuck team.", "work.html") + nav("work.html") + \
+    pagehead("Our Work", "Featured <em>Projects.</em>", "A showcase of Hindi voice-over, dubbing and narration by our team.") + """
+<section class="sec" style="padding-top:80px"><div class="wrap"><div data-work="all"></div></div></section>
+""" + FOOT
+
+NEEDS = ["Voice-over", "Dubbing", "Translation", "Subtitling", "Something else"]
+PAGES["contact.html"] = lambda: head("Contact | smokyDuck Studio",
+    "Get a quote for Hindi voice-over, dubbing, translation or subtitling. Email, WhatsApp or send us your brief.", "contact.html") + nav("contact.html") + \
+    pagehead("Contact", "Let's <em>talk.</em>", "Tell us what you're making. We'll reply with a price and a plan.") + f"""
+<section class="sec light"><div class="wrap contact">
+<div class="ways rv"><p class="label">( Write or call )</p>
+<a class="u" data-email href="mailto:hello@smokyduckstudio.com">hello@smokyduckstudio.com</a><br>
+<a class="u" data-wa href="#">WhatsApp →</a></div>
+<form class="form rv" data-sd-form novalidate>
+<input type="hidden" name="formType" value="Quote"><label class="hp" aria-hidden="true">Leave empty<input name="website_hp" tabindex="-1" autocomplete="off"></label>
+<div class="f2"><div><label for="c-name">Name *</label><input id="c-name" name="name" autocomplete="name" required></div>
+<div><label for="c-email">Email *</label><input id="c-email" name="email" type="email" autocomplete="email" required></div></div>
+<div class="f2"><div><label for="c-company">Company</label><input id="c-company" name="company" autocomplete="organization"></div>
+<div><label for="c-need">What do you need?</label><select id="c-need" name="services">{"".join(f"<option>{n}</option>" for n in NEEDS)}</select></div></div>
+<div class="f2"><div><label for="c-lang">Languages</label><input id="c-lang" name="targetLanguages" placeholder="e.g. English → Hindi"></div>
+<div><label for="c-voice">Voice (optional)</label><input id="c-voice" name="voice" placeholder="A voice from our roster, or the sound you want"></div></div>
+<div><label for="c-msg">Tell us about the project *</label><textarea id="c-msg" name="message" required placeholder="Length, deadline, where it will be used, a link to the script or video…"></textarea></div>
+<label class="check"><input type="checkbox" name="consent" value="yes" required><span>I agree smokyDuck may keep these details to reply to me (<a href="legal.html">privacy</a>).</span></label>
+<div class="status" role="status" aria-live="polite"></div>
+<div><button class="btn" type="submit">Send</button></div>
+</form></div></section>
+""" + FOOT
+
+PAGES["legal.html"] = lambda: head("Privacy & Terms | smokyDuck Studio", "How smokyDuck handles your data, and the terms for our services.", "legal.html") + nav("") + \
+    pagehead("Legal", "Privacy &amp; <em>Terms.</em>", f"Last updated {TODAY}.") + """
+<section class="sec" style="padding-top:40px"><div class="wrap prose">
+<h2>Privacy</h2>
+<p>smokyDuck Studio runs smokyduckstudio.com. Questions about your data: hello@smokyduckstudio.com.</p>
+<p><strong>What we collect.</strong> What you send through the contact form or by email or WhatsApp (your name, email, company and project details), and the files you share for a project. If you allow it, Google Analytics records anonymous page visits.</p>
+<p><strong>Why.</strong> To reply to you, quote, deliver and invoice work. We don't sell your data or add you to mailing lists.</p>
+<p><strong>Who sees it.</strong> Our team, and the voice artists or linguists working on your project under confidentiality. We use Google (email, Drive, Sheets) and GitHub Pages (hosting) to run the business.</p>
+<p><strong>Voice artists.</strong> We never publish, share or clone an artist's voice without their written consent.</p>
+<p><strong>Your rights.</strong> You can ask us to show, correct or delete your data at any time, under India's DPDP Act 2023, the UK GDPR or the EU GDPR. We reply within 30 days.</p>
+<p><strong>Cookies.</strong> The site works without cookies. Analytics cookies are set only if you choose “Allow”.</p>
+<h2>Terms</h2>
+<p><strong>Quotes.</strong> Each project's scope, price, deadline and usage rights are set out in its quote, valid for 30 days.</p>
+<p><strong>Your material.</strong> You confirm you have the right to give us the scripts and media for the work.</p>
+<p><strong>Usage.</strong> Recordings are licensed for the media, region and period in the quote. Wider use needs a new licence. Recordings may not be used to train AI or create a synthetic voice without the artist's written consent.</p>
+<p><strong>Ownership.</strong> Once paid in full, the delivered files are yours, within the agreed usage.</p>
+<p><strong>Confidentiality.</strong> We keep your files private and will sign your NDA.</p>
+<p><strong>Liability.</strong> Our liability for a project is limited to its fee. These terms are governed by the laws of India.</p>
+</div></section>
+""" + FOOT
+
+def notfound():
+    s = head("Page not found | smokyDuck", "This page doesn't exist.", "404.html", robots="noindex") + nav("") + \
+        pagehead("404", "Dead <em>air.</em>", 'This page doesn\'t exist. <a class="u" href="index.html" style="color:#f4f4f0">Back home →</a>') + FOOT
+    s = re.sub(r'(href|src)="(?!https?:|mailto:|#|/)([^"]+)"', r'\1="/\2"', s)
+    return s
+PAGES["404.html"] = notfound
+
+if __name__ == "__main__":
+    for p, fn in PAGES.items():
+        open(os.path.join(OUT, p), "w", encoding="utf-8").write(fn())
+    urls = [p for p in PAGES if p != "404.html"]
+    open(os.path.join(OUT, "sitemap.xml"), "w").write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+        "".join(f'  <url><loc>{BASE}{"" if p=="index.html" else p}</loc><lastmod>{TODAY}</lastmod></url>\n' for p in urls) + "</urlset>\n")
+    open(os.path.join(OUT, "robots.txt"), "w").write(f"User-agent: *\nAllow: /\n\nSitemap: {BASE}sitemap.xml\n")
+    print("built", len(PAGES), "pages")
