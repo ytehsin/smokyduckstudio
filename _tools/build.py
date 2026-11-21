@@ -10,8 +10,8 @@ NAV = [("services.html", "Services"), ("voices.html", "Voices"), ("work.html", "
 
 ORG = {"@context": "https://schema.org", "@type": "ProfessionalService", "@id": BASE + "#org", "name": "smokyDuck Studio",
        "url": BASE, "email": "hello@smokyduckstudio.com", "logo": BASE + "assets/img/logo-512.png",
-       "description": "Hindi voice-over, dubbing, translation and subtitling studio.",
-       "areaServed": ["IN", "GB", "US", "AE"], "knowsLanguage": ["hi", "ur", "en"]}
+       "description": "Human voice-over, dubbing, translation and subtitling in all Indian languages, with separate AI dubbing services.",
+       "areaServed": ["IN", "GB", "US", "AE"], "knowsLanguage": ["hi","bn","mr","te","ta","gu","ur","kn","ml","or","pa","as","en"]}
 
 def head(title, desc, path, extra=None, robots="index,follow"):
     url = BASE + ("" if path == "index.html" else path)
@@ -33,7 +33,6 @@ def head(title, desc, path, extra=None, robots="index,follow"):
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<link rel="preload" href="assets/fonts/bricolage.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/site.css">
 {ldh}
 </head>
@@ -71,22 +70,31 @@ FOOT = """</main>
 def pagehead(label, h1, lede):
     return f'<header class="head"><div class="wrap rv"><p class="label">( {label} )</p><h1>{h1}</h1><p>{lede}</p></div></header>'
 
+LANGS = "Hindi · Bengali · Marathi · Telugu · Tamil · Gujarati · Urdu · Kannada · Malayalam · Odia · Punjabi · Assamese · and every other Indian language, plus English"
+
 SERVICES = [
-    ("Voice-Over", "Natural Hindi, Urdu and English voices for commercials, e-learning, explainers, documentaries and corporate films. We cast, direct and deliver finished audio.",
-     ["Commercials and brand films", "E-learning and training", "Explainers and corporate", "Documentary narration"]),
-    ("Dubbing", "Hindi dubbing for animation, series, films and YouTube, including human finishing of AI dubs so they sound like they were made in Hindi.",
-     ["Animation and character voices", "Series, film and YouTube", "AI-dub review and re-voice", "Lip-sync where needed"]),
-    ("Translation", "Scripts adapted for the ear, not word-for-word. We translate for timing, tone and audience, whether Hindi or Hinglish.",
-     ["English ⇄ Hindi scripts", "Course and e-learning content", "On-screen text", "Glossaries for consistency"]),
-    ("Subtitling", "Accurate, perfectly timed subtitles and clean transcripts, delivered with your dub or on their own.",
-     ["Hindi and English subtitles", "SRT and VTT files", "Transcription", "Burned-in captions for social"]),
+    ("Voice-Over", "Real human voice artists in every Indian language — for commercials, e-learning, explainers, documentaries, IVR and corporate films. Cast, directed and delivered as finished audio.",
+     ["Commercials and brand films", "E-learning and training", "Documentary narration", "IVR and announcements"]),
+    ("Dubbing", "Human dubbing for films, series, animation and YouTube — performed by native voice actors, synced to picture and mixed for broadcast.",
+     ["Films, series and OTT", "Animation and character voices", "YouTube and digital content", "Lip-sync and voice matching"]),
+    ("Translation", "Professional translation and localisation between English and all Indian languages, by native linguists. Documents, websites, apps, scripts, courses and marketing — not just for voice-over.",
+     ["Documents and business content", "Websites, apps and software", "E-learning and courses", "Marketing and transcreation"]),
+    ("Subtitling", "Accurate, perfectly timed subtitles and clean transcripts in any Indian language, delivered with your project or on their own.",
+     ["Subtitles in all Indian languages", "SRT and VTT files", "Transcription", "Burned-in captions for social"]),
+]
+
+AI_SERVICES = [
+    ("AI Dubbing", "Rapid voice synthesis and lip-syncing for quick-turnaround projects."),
+    ("AI Video Generation", "Localised visual assets and adaptations using generative models."),
+    ("AI Assisted Translation", "Machine translation with our glossaries, for high volumes and tight budgets."),
 ]
 
 FAQ = [
-    ("How do you price?", "Per finished minute for voice-over and dubbing, per word for translation. Send the script or a clip and we'll quote the same day where we can."),
-    ("How fast can you deliver?", "It depends on length and the number of voices. Short spots can turn around in a day or two. Your quote states the date."),
-    ("Do you use AI?", "Where it saves you time, yes. Every minute is still checked by a native Hindi speaker, and anything that doesn't sound right is re-recorded by a person."),
-    ("Can we start with a short test?", "Yes. A short sample is the best way to agree what good sounds like before a larger project."),
+    ("Which languages do you work in?", "All Indian languages — including Hindi, Bengali, Marathi, Telugu, Tamil, Gujarati, Urdu, Kannada, Malayalam, Odia, Punjabi and Assamese — plus English. Tell us the pair you need."),
+    ("Are your voice-overs done by real people?", "Yes. Our voice-over and dubbing services use real human voice artists only. AI voices are a separate service that you choose explicitly."),
+    ("What's the difference between your human and AI services?", "Human services are performed by voice artists and linguists. AI services are faster and cheaper, for projects where speed and volume matter more than performance. They are quoted separately, and we never mix them without telling you."),
+    ("Do you translate without voice-over?", "Yes. Translation is a service on its own — documents, websites, apps, courses and marketing in any Indian language."),
+    ("How do you price?", "Voice-over and dubbing per finished minute, translation per word. Send the script or file and we'll quote the same day where we can."),
     ("Will you sign an NDA?", "Yes, before you share any files."),
     ("Who owns the recordings?", "You do, once paid, for the usage agreed in the quote. We never clone or reuse a voice without the artist's written consent."),
 ]
@@ -96,8 +104,8 @@ def faq_ld(items): return {"@context": "https://schema.org", "@type": "FAQPage",
 
 PAGES = {}
 
-PAGES["index.html"] = lambda: head("smokyDuck | Hindi Voice-Over, Dubbing & Translation Studio",
-    "smokyDuck is a Hindi voice-over and dubbing studio. Human voices, translation and subtitles for brands, agencies, e-learning and media.", "index.html") + nav("") + f"""
+PAGES["index.html"] = lambda: head("smokyDuck | Voice-Over, Dubbing & Translation in All Indian Languages",
+    "Human voice-over, dubbing, translation and subtitling in every Indian language. Real voice artists and native linguists, plus separate AI dubbing services.", "index.html") + nav("") + f"""
 <header class="hero"><div class="glow" aria-hidden="true"></div>
 <h1 class="rv">smoky<span class="d">D</span>uck.</h1>
 <p class="tagline rv"><span>Global Voices.</span> <span>Human Craft.</span> <span>AI Speed.</span></p>
@@ -105,23 +113,25 @@ PAGES["index.html"] = lambda: head("smokyDuck | Hindi Voice-Over, Dubbing & Tran
 
 <section class="sec"><div class="wrap statement">
 <p class="label rv">( Who We Are )</p>
-<h2 class="rv">A Hindi voice studio. We bring the world's content to Hindi audiences — and Hindi voices to the world — with dubbing and voice-over that feel native, not translated.</h2>
+<h2 class="rv">A voice and language studio for every Indian language. Real voice artists and native linguists who make your content sound like it was made here — not translated.</h2>
 </div></section>
 
 <section class="sec light"><div class="wrap">
-<h2 class="big rv">Our Services</h2>
-<div class="rows rv">{"".join(f'<a class="row" href="services.html#{t.lower().replace("-","")}"><span class="n">0{i+1}</span><div><h3>{t}</h3><p>{d}</p></div></a>' for i,(t,d,_) in enumerate(SERVICES))}</div>
+<p class="label rv" style="color:#5f5f5a">( Human Studio )</p><h2 class="big rv">Our Services</h2>
+<div class="rows rv">{"".join(f'<a class="row" href="services.html#{t.lower().replace("-","").replace(" ","")}"><span class="n">0{i+1}</span><div><h3>{t}</h3><p>{d}</p></div></a>' for i,(t,d,_) in enumerate(SERVICES))}</div>
 </div></section>
 
-<section class="sec marq"><div class="bg" aria-hidden="true"><span>Human + AI • Human + AI • Human + AI • Human + AI •&nbsp;</span></div>
+<section class="sec"><div class="wrap statement">
+<p class="label rv">( Languages )</p>
+<p class="langs rv">{LANGS}</p>
+</div></section>
+
+<section class="sec marq" style="border-top:1px solid var(--line)"><div class="bg" aria-hidden="true"><span>AI Studio • AI Studio • AI Studio • AI Studio •&nbsp;</span></div>
 <div class="wrap two">
-<div class="rv"><h2>The AI Advantage.</h2><p class="muted" style="font-size:20px;font-weight:300;max-width:440px">AI handles the heavy lifting. Our people handle everything that makes it sound human.</p>
-<a class="btn" href="contact.html" style="margin-top:20px">Start a project</a></div>
-<div class="steps rv">
-<div><h4>1. AI where it helps</h4><p class="muted">Transcripts, first drafts and quick-turnaround dubs.</p></div>
-<div><h4>2. Native ears on every minute</h4><p class="muted">A Hindi speaker checks meaning, names and timing.</p></div>
-<div><h4>3. Human voices where it matters</h4><p class="muted">Anything that sounds flat is re-recorded by a person.</p></div>
-</div></div></section>
+<div class="rv"><p class="label">( Separate from our human studio )</p><h2>The AI Advantage.</h2><p class="muted" style="font-size:20px;font-weight:300;max-width:440px">For projects where speed and volume matter most, we run a separate set of AI services — clearly labelled and quoted on their own.</p>
+<a class="btn" href="services.html#ai" style="margin-top:20px">AI services</a></div>
+<div class="ai-list rv">{"".join(f'<div><h4>{i+1}. {t}</h4><p class="muted">{d}</p></div>' for i,(t,d) in enumerate(AI_SERVICES))}</div>
+</div></section>
 
 <section class="sec" style="padding-top:0"><div class="wrap">
 <p class="label rv">( Our Work )</p>
@@ -131,21 +141,25 @@ PAGES["index.html"] = lambda: head("smokyDuck | Hindi Voice-Over, Dubbing & Tran
 </div></section>
 """ + FOOT
 
-PAGES["services.html"] = lambda: head("Services | Hindi Voice-Over, Dubbing, Translation & Subtitling | smokyDuck",
-    "Hindi voice-over, dubbing, translation and subtitling from smokyDuck. Native voices, human-checked AI, delivered to your specs.", "services.html", [faq_ld(FAQ)]) + nav("services.html") + \
-    pagehead("Services", "What we <em>do.</em>", "Four services, one standard: it has to sound like it was made in Hindi.") + f"""
-<section class="sec light"><div class="wrap"><div class="rows">
-{"".join(f'<div class="row rv" id="{t.lower().replace("-","")}"><span class="n">0{i+1}</span><div><h3>{t}</h3><p>{d}</p><ul>{"".join(f"<li>{x}</li>" for x in l)}</ul></div></div>' for i,(t,d,l) in enumerate(SERVICES))}
+PAGES["services.html"] = lambda: head("Services | Voice-Over, Dubbing, Translation & Subtitling in Indian Languages | smokyDuck",
+    "Human voice-over, dubbing, translation and subtitling in every Indian language, plus separate AI dubbing, AI video and AI-assisted translation services.", "services.html", [faq_ld(FAQ)]) + nav("services.html") + \
+    pagehead("Services", "What we <em>do.</em>", "Two studios. Our human studio — real voice artists and native linguists in every Indian language. And a separate AI studio for speed and scale.") + f"""
+<section class="sec light"><div class="wrap"><p class="label rv" style="color:#5f5f5a">( Human Studio )</p><h2 class="big rv" style="font-size:clamp(44px,6vw,84px)">Real people.</h2><div class="rows">
+{"".join(f'<div class="row rv" id="{t.lower().replace("-","").replace(" ","")}"><span class="n">0{i+1}</span><div><h3>{t}</h3><p>{d}</p><ul>{"".join(f"<li>{x}</li>" for x in l)}</ul></div></div>' for i,(t,d,l) in enumerate(SERVICES))}
 </div></div></section>
-<section class="sec"><div class="wrap statement">
+<section class="sec" id="ai"><div class="wrap two">
+<div class="rv"><p class="label">( AI Studio )</p><h2>AI services.</h2><p class="muted" style="font-size:20px;font-weight:300;max-width:440px">A separate offering for fast, high-volume work. Quoted on its own and never mixed into our human services without your say.</p></div>
+<div class="ai-list rv">{"".join(f'<div><h4>{i+1}. {t}</h4><p class="muted">{d}</p></div>' for i,(t,d) in enumerate(AI_SERVICES))}</div>
+</div></section>
+<section class="sec" style="border-top:1px solid var(--line)"><div class="wrap statement">
 <p class="label rv">( Questions )</p>
 <div class="rv">{faq_html(FAQ)}</div>
 </div></section>
 """ + FOOT
 
-PAGES["voices.html"] = lambda: head("Voices | Hindi Voice Artists | smokyDuck",
-    "Listen to smokyDuck's Hindi, Urdu and English voices. Play samples and enquire about any voice.", "voices.html") + nav("voices.html") + \
-    pagehead("Voices", "Our <em>voices.</em>", "Press play. When you hear the one, ask us about it.") + """
+PAGES["voices.html"] = lambda: head("Voices | Voice Artists in All Indian Languages | smokyDuck",
+    "Listen to smokyDuck's human voice artists across Indian languages. Play samples and enquire about any voice.", "voices.html") + nav("voices.html") + \
+    pagehead("Voices", "Our <em>voices.</em>", "Real human voice artists across Indian languages. Press play — when you hear the one, ask us about it.") + """
 <section class="sec" style="padding-top:64px"><div class="wrap">
 <div class="filters" role="search" aria-label="Filter voices">
 <div><label class="sr" for="f-language">Language</label><select id="f-language"><option value="">All languages</option></select></div>
@@ -159,15 +173,15 @@ PAGES["voices.html"] = lambda: head("Voices | Hindi Voice Artists | smokyDuck",
 <dialog id="voice-dialog" aria-label="Voice profile"><button class="close" type="button" aria-label="Close">×</button><div class="dlg"></div></dialog>
 """ + FOOT
 
-PAGES["work.html"] = lambda: head("Work | Hindi Dubbing & Voice-Over Samples | smokyDuck",
-    "Hindi commercials, animation dubbing, YouTube dubs and narration by the smokyDuck team.", "work.html") + nav("work.html") + \
-    pagehead("Our Work", "Featured <em>Projects.</em>", "A showcase of Hindi voice-over, dubbing and narration by our team.") + """
+PAGES["work.html"] = lambda: head("Work | Voice-Over & Dubbing Samples | smokyDuck",
+    "Commercials, animation dubbing, YouTube dubs and narration voiced by the smokyDuck team.", "work.html") + nav("work.html") + \
+    pagehead("Our Work", "Featured <em>Projects.</em>", "Voice-over, dubbing and narration by our team — real voices, real projects.") + """
 <section class="sec" style="padding-top:80px"><div class="wrap"><div data-work="all"></div></div></section>
 """ + FOOT
 
-NEEDS = ["Voice-over", "Dubbing", "Translation", "Subtitling", "Something else"]
+NEEDS = ["Voice-over (human)", "Dubbing (human)", "Translation", "Subtitling", "AI services", "Something else"]
 PAGES["contact.html"] = lambda: head("Contact | smokyDuck Studio",
-    "Get a quote for Hindi voice-over, dubbing, translation or subtitling. Email, WhatsApp or send us your brief.", "contact.html") + nav("contact.html") + \
+    "Get a quote for voice-over, dubbing, translation or subtitling in any Indian language. Email, WhatsApp or send us your brief.", "contact.html") + nav("contact.html") + \
     pagehead("Contact", "Let's <em>talk.</em>", "Tell us what you're making. We'll reply with a price and a plan.") + f"""
 <section class="sec light"><div class="wrap contact">
 <div class="ways rv"><p class="label">( Write or call )</p>
@@ -179,7 +193,7 @@ PAGES["contact.html"] = lambda: head("Contact | smokyDuck Studio",
 <div><label for="c-email">Email *</label><input id="c-email" name="email" type="email" autocomplete="email" required></div></div>
 <div class="f2"><div><label for="c-company">Company</label><input id="c-company" name="company" autocomplete="organization"></div>
 <div><label for="c-need">What do you need?</label><select id="c-need" name="services">{"".join(f"<option>{n}</option>" for n in NEEDS)}</select></div></div>
-<div class="f2"><div><label for="c-lang">Languages</label><input id="c-lang" name="targetLanguages" placeholder="e.g. English → Hindi"></div>
+<div class="f2"><div><label for="c-lang">Languages</label><input id="c-lang" name="targetLanguages" placeholder="e.g. English → Tamil, Bengali"></div>
 <div><label for="c-voice">Voice (optional)</label><input id="c-voice" name="voice" placeholder="A voice from our roster, or the sound you want"></div></div>
 <div><label for="c-msg">Tell us about the project *</label><textarea id="c-msg" name="message" required placeholder="Length, deadline, where it will be used, a link to the script or video…"></textarea></div>
 <label class="check"><input type="checkbox" name="consent" value="yes" required><span>I agree smokyDuck may keep these details to reply to me (<a href="legal.html">privacy</a>).</span></label>
