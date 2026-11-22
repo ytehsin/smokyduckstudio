@@ -1,13 +1,21 @@
 {
-  "_readme": "Voices shown in the drop-down on the Voices page. Add one block per artist (with their consent). 'src' = an MP3 in assets/media.",
+  "_readme": "Voices shown in the drop-down on the Voices page. 'src' = an MP3 in assets/media. Names are intentionally generic.",
   "voices": [
     {
-      "id": "gagan",
-      "name": "Gagan",
-      "gender": "Male",
+      "id": "male-1",
+      "name": "Male voice",
+      "gender": "",
       "languages": "Hindi · Urdu · English",
-      "style": "TV commercials, dubbing, animation",
-      "src": "assets/media/audio-hindi-tvc.mp3"
+      "style": "Commercials, dubbing, animation",
+      "src": "assets/media/voice-male-1.mp3"
+    },
+    {
+      "id": "female-1",
+      "name": "Female voice",
+      "gender": "",
+      "languages": "",
+      "style": "",
+      "src": "assets/media/voice-female-1.mp3"
     }
   ]
 }
