@@ -33,7 +33,7 @@ def head(title, desc, path, extra=None, robots="index,follow"):
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/site.css?v=4">
 {ldh}
 </head>
 <body>
@@ -54,15 +54,15 @@ FOOT = """</main>
 <footer id="contact"><div class="wrap">
 <div class="rv"><h2>Ready to<br>go global?</h2>
 <a class="mail u" data-email href="mailto:hello@smokyduckstudio.com">hello@smokyduckstudio.com</a>
-<a class="wa u" data-wa href="#">WhatsApp +91 88666 66447 →</a></div>
+<a class="wa u" href="https://wa.me/918866666447" target="_blank" rel="noopener">WhatsApp +91 88666 66447 →</a></div>
 <div class="foot"><nav><a class="u" data-social="instagram" href="#">Instagram</a><a class="u" data-social="linkedin" href="#">LinkedIn</a><a class="u" data-social="youtube" href="#">YouTube</a><a class="u" href="legal.html">Privacy &amp; Terms</a></nav>
 <span class="c">© <span data-year>2026</span> SmokyDuck Studio – Indic &amp; Global Multimedia Localization</span></div>
 </div></footer>
 <div class="consent" id="consent" role="dialog" aria-label="Cookies"><p style="margin:0">May we use Google Analytics to see which pages are useful? It sets cookies only if you allow it.</p>
 <button class="btn" data-consent="yes" type="button">Allow</button><button class="btn" data-consent="no" type="button">No thanks</button></div>
-<script src="assets/js/config.js"></script>
-<script src="assets/js/site.js" defer></script>
-<script src="assets/js/data.js" defer></script>
+<script src="assets/js/config.js?v=4"></script>
+<script src="assets/js/site.js?v=4" defer></script>
+<script src="assets/js/data.js?v=4" defer></script>
 </body>
 </html>
 """
@@ -153,20 +153,13 @@ PAGES["services.html"] = lambda: head("Hindi Dubbing, Voice-Over & E-learning Lo
 </div></section>
 """ + FOOT
 
-PAGES["voices.html"] = lambda: head("Voice Artists in All Indian Languages | SmokyDuck Studio – Indic & Global Multimedia Localization",
-    "Listen to SmokyDuck Studio's human voice artists across Indian languages. Play samples and enquire about any voice.", "voices.html") + nav("voices.html") + \
-    pagehead("Voices", "Our <em>voices.</em>", "Real human voice artists across Indian languages. Press play — when you hear the one, ask us about it.") + """
-<section class="sec" style="padding-top:64px"><div class="wrap">
-<div class="filters" role="search" aria-label="Filter voices">
-<div><label class="sr" for="f-language">Language</label><select id="f-language"><option value="">All languages</option></select></div>
-<div><label class="sr" for="f-gender">Gender</label><select id="f-gender"><option value="">Any gender</option></select></div>
-<div><label class="sr" for="f-style">Voice</label><select id="f-style"><option value="">Any tone</option></select></div>
-<div><label class="sr" for="f-category">Best for</label><select id="f-category"><option value="">Any project</option></select></div>
-</div>
-<div id="voices"></div>
-<p class="muted rv" style="margin-top:56px">Are you a voice artist? <a class="u" href="contact.html?formType=Artist">Send us your demo.</a></p>
+PAGES["voices.html"] = lambda: head("Voices of Our Artists | SmokyDuck Studio – Indic & Global Multimedia Localization",
+    "Hear the voices of SmokyDuck Studio's artists: real human voice-over and dubbing across Indian languages.", "voices.html") + nav("voices.html") + \
+    pagehead("Voices", "Voices of our <em>artists.</em>", "Real human voices across Indian languages. Press play.") + """
+<section class="sec" style="padding-top:72px"><div class="wrap">
+<div class="reel rv"><video controls playsinline preload="metadata" poster="assets/media/voices-reel.jpg" src="assets/media/voices-reel.mp4" aria-label="SmokyDuck Studio voice reel"></video></div>
+<p class="muted rv" style="margin-top:56px;text-align:center">Need a specific voice, language or age? <a class="u" href="contact.html">Tell us</a> and we'll cast it.<br>Are you a voice artist? <a class="u" href="contact.html?formType=Artist">Send us your demo.</a></p>
 </div></section>
-<dialog id="voice-dialog" aria-label="Voice profile"><button class="close" type="button" aria-label="Close">×</button><div class="dlg"></div></dialog>
 """ + FOOT
 
 PAGES["work.html"] = lambda: head("Portfolio: Hindi Dubbing & Voice-Over Samples | SmokyDuck Studio – Indic & Global Multimedia Localization",
@@ -182,7 +175,7 @@ PAGES["contact.html"] = lambda: head("Contact | SmokyDuck Studio – Indic & Glo
 <section class="sec light"><div class="wrap contact">
 <div class="ways rv"><p class="label">( Write or call )</p>
 <a class="u" data-email href="mailto:hello@smokyduckstudio.com">hello@smokyduckstudio.com</a><br>
-<a class="u" data-wa href="#">+91 88666 66447</a><br><span class="muted" style="font-size:14px">WhatsApp or call</span></div>
+<a class="u" href="https://wa.me/918866666447" target="_blank" rel="noopener">+91 88666 66447</a><br><span class="muted" style="font-size:14px">WhatsApp or call</span></div>
 <form class="form rv" data-sd-form novalidate>
 <input type="hidden" name="formType" value="Quote"><label class="hp" aria-hidden="true">Leave empty<input name="website_hp" tabindex="-1" autocomplete="off"></label>
 <div class="f2"><div><label for="c-name">Name *</label><input id="c-name" name="name" autocomplete="name" required></div>

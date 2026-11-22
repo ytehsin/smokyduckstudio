@@ -8,27 +8,46 @@
   function pad(i) { return (i < 9 ? "0" : "") + (i + 1); }
   function reveal(box) { box.querySelectorAll(".rv").forEach(function (el) { window.SD_reveal ? SD_reveal(el) : el.classList.add("in"); }); }
 
-  /* one audio at a time */
-  var cur = null, curBtn = null;
+  /* ---------- one thing plays at a time (audio, video, Drive embeds) ---------- */
+  var activeFrame = null, cur = null, curBtn = null;
+  function stopAll(except) {
+    document.querySelectorAll("video, audio").forEach(function (m) { if (m !== except && !m.paused) m.pause(); });
+    if (cur && cur !== except && !cur.paused) cur.pause();
+    if (activeFrame && activeFrame !== except) { var f = activeFrame; activeFrame = null; f.parentNode && f.parentNode.removeChild(f); }
+  }
+  document.addEventListener("play", function (e) { stopAll(e.target); }, true);
   document.addEventListener("click", function (e) {
+    var fac = e.target.closest(".facade[data-embed]");
+    if (fac) {
+      stopAll(null);
+      var i = document.createElement("iframe");
+      i.src = fac.getAttribute("data-embed"); i.title = fac.getAttribute("aria-label") || "Video";
+      i.allow = "autoplay; fullscreen"; i.allowFullscreen = true;
+      fac.parentNode.appendChild(i); activeFrame = i; return;
+    }
     var b = e.target.closest(".play[data-src]"); if (!b) return;
-    if (curBtn === b) { if (cur.paused) { cur.play(); b.innerHTML = PAUSE; b.classList.add("on"); } else { cur.pause(); b.innerHTML = PLAY; b.classList.remove("on"); } return; }
-    if (cur) { cur.pause(); curBtn.innerHTML = PLAY; curBtn.classList.remove("on"); }
-    cur = new Audio(b.getAttribute("data-src")); curBtn = b; cur.play(); b.innerHTML = PAUSE; b.classList.add("on");
+    if (curBtn === b && cur) { if (cur.paused) { stopAll(cur); cur.play(); } else cur.pause(); return; }
+    if (cur) cur.pause();
+    cur = new Audio(b.getAttribute("data-src")); curBtn = b;
+    cur.addEventListener("play", function () { b.innerHTML = PAUSE; b.classList.add("on"); });
+    cur.addEventListener("pause", function () { b.innerHTML = PLAY; b.classList.remove("on"); });
     cur.addEventListener("ended", function () { b.innerHTML = PLAY; b.classList.remove("on"); });
+    stopAll(cur); cur.play().catch(function () { b.innerHTML = PLAY; });
   });
   function playBtn(url, title) { return '<button class="play" type="button" aria-label="Play ' + esc(title) + '"' + (url ? ' data-src="' + esc(url) + '"' : " disabled") + ">" + PLAY + "</button>"; }
-  function video(url, title) { return '<div class="video"><div class="shield"></div><iframe src="' + esc(url) + '" title="' + esc(title) + '" loading="lazy" allow="autoplay; fullscreen" allowfullscreen></iframe></div>'; }
+  function video(x) {
+    if (x.kind === "video") return '<div class="video"><video controls playsinline preload="none" poster="' + esc(x.poster || "") + '" src="' + esc(x.src) + '"></video></div>';
+    return '<div class="video"><button class="facade" type="button" data-embed="' + esc(x.embed) + '" aria-label="Play ' + esc(x.title) + '" style="background-image:url(' + esc(x.thumb || "") + ')"><span class="play">' + PLAY + "</span></button></div>";
+  }
 
   /* ---------- WORK ---------- */
   document.querySelectorAll("[data-work]").forEach(function (box) {
-    var featured = box.getAttribute("data-work") === "featured";
     json("data/portfolio.json").then(function (d) {
-      var items = (d.items || []).filter(function (x) { return (x.embed || x.audio) && (!featured || x.featured); });
-      var vids = items.filter(function (x) { return x.kind === "video"; }), auds = items.filter(function (x) { return x.kind === "audio"; });
+      var items = (d.items || []).filter(function (x) { return x.src || x.embed || x.audio; });
+      var vids = items.filter(function (x) { return x.kind !== "audio"; }), auds = items.filter(function (x) { return x.kind === "audio"; });
       box.innerHTML = '<div class="grid">' + vids.map(function (x, i) {
-        return '<article class="item rv">' + video(x.embed, x.title) + '<div class="meta"><div><h3>' + esc(x.title) + "</h3><p>" + esc(x.service) + "</p></div><span class=\"num\">" + pad(i) + "</span></div></article>";
-      }).join("") + "</div>" + (auds.length && !featured ? '<div style="margin-top:96px"><p class="label">( Audio )</p>' + auds.map(function (x) {
+        return '<article class="item rv">' + video(x) + '<div class="meta"><div><h3>' + esc(x.title) + "</h3><p>" + esc(x.service) + " · " + esc(x.languages) + '</p></div><span class="num">' + pad(i) + "</span></div></article>";
+      }).join("") + "</div>" + (auds.length ? '<div style="margin-top:96px"><p class="label">( Audio )</p>' + auds.map(function (x) {
         return '<div class="audio">' + playBtn(x.audio, x.title) + "<div><h3>" + esc(x.title) + "</h3><p>" + esc(x.service) + " · " + esc(x.languages) + "</p></div></div>";
       }).join("") + "</div>" : "");
       reveal(box);
