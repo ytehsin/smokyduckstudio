@@ -133,12 +133,6 @@ PAGES["index.html"] = lambda: head("smokyDuck | Voice-Over, Dubbing & Translatio
 <div class="ai-list rv">{"".join(f'<div><h4>{i+1}. {t}</h4><p class="muted">{d}</p></div>' for i,(t,d) in enumerate(AI_SERVICES))}</div>
 </div></section>
 
-<section class="sec" style="padding-top:0"><div class="wrap">
-<p class="label rv">( Our Work )</p>
-<h2 class="rv" style="font-size:clamp(52px,8vw,110px);margin-bottom:64px">Featured <em style="font-style:italic;font-weight:500;color:#5f5f5a">Projects.</em></h2>
-<div data-work="featured"></div>
-<p class="rv" style="margin-top:72px"><a class="btn" href="work.html">All work</a> &nbsp; <a class="btn" href="voices.html">Hear our voices</a></p>
-</div></section>
 """ + FOOT
 
 PAGES["services.html"] = lambda: head("Services | Voice-Over, Dubbing, Translation & Subtitling in Indian Languages | smokyDuck",
