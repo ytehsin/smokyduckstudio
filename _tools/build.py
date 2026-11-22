@@ -33,7 +33,7 @@ def head(title, desc, path, extra=None, robots="index,follow"):
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<link rel="stylesheet" href="assets/css/site.css?v=4">
+<link rel="stylesheet" href="assets/css/site.css?v=5">
 {ldh}
 </head>
 <body>
@@ -60,9 +60,9 @@ FOOT = """</main>
 </div></footer>
 <div class="consent" id="consent" role="dialog" aria-label="Cookies"><p style="margin:0">May we use Google Analytics to see which pages are useful? It sets cookies only if you allow it.</p>
 <button class="btn" data-consent="yes" type="button">Allow</button><button class="btn" data-consent="no" type="button">No thanks</button></div>
-<script src="assets/js/config.js?v=4"></script>
-<script src="assets/js/site.js?v=4" defer></script>
-<script src="assets/js/data.js?v=4" defer></script>
+<script src="assets/js/config.js?v=5"></script>
+<script src="assets/js/site.js?v=5" defer></script>
+<script src="assets/js/data.js?v=5" defer></script>
 </body>
 </html>
 """
@@ -113,9 +113,10 @@ PAGES["index.html"] = lambda: head("SmokyDuck Studio – Indic & Global Multimed
 <p class="tagline2 rv"><span>Global Voices.</span> <span>Human Craft.</span> <span>AI Speed.</span></p>
 <p class="scroll" aria-hidden="true">Scroll to explore</p></header>
 
-<section class="sec"><div class="wrap statement">
-<p class="label rv">( Who We Are )</p>
-<h2 class="rv">SmokyDuck Studio is a Hindi dubbing studio and Indian language localisation company. Real voice artists and native linguists who make your content sound like it was made here — not translated.</h2>
+<section class="sec"><div class="wrap about">
+<div><p class="label rv">( Who We Are )</p>
+<h2 class="rv">SmokyDuck Studio is a Hindi dubbing studio and Indian language localisation company. Real voice artists and native linguists who make your content sound like it was made here — not translated.</h2></div>
+<div class="reel big rv"><video controls playsinline preload="metadata" poster="assets/media/voices-reel.jpg" src="assets/media/voices-reel.mp4" aria-label="Gagan, co-founder, on SmokyDuck Studio"></video></div>
 </div></section>
 
 <section class="sec light"><div class="wrap">
@@ -154,12 +155,30 @@ PAGES["services.html"] = lambda: head("Hindi Dubbing, Voice-Over & E-learning Lo
 """ + FOOT
 
 PAGES["voices.html"] = lambda: head("Voices of Our Artists | SmokyDuck Studio – Indic & Global Multimedia Localization",
-    "Hear the voices of SmokyDuck Studio's artists: real human voice-over and dubbing across Indian languages.", "voices.html") + nav("voices.html") + \
-    pagehead("Voices", "Voices of our <em>artists.</em>", "Real human voices across Indian languages. Press play.") + """
+    "Choose a voice and listen live: real human voice artists from SmokyDuck Studio across Indian languages.", "voices.html") + nav("voices.html") + \
+    pagehead("Voices", "Voices of our <em>artists.</em>", "Pick a voice and press play.") + """
 <section class="sec" style="padding-top:72px"><div class="wrap">
-<div class="reel rv"><video controls playsinline preload="metadata" poster="assets/media/voices-reel.jpg" src="assets/media/voices-reel.mp4" aria-label="SmokyDuck Studio voice reel"></video></div>
-<p class="muted rv" style="margin-top:56px;text-align:center">Need a specific voice, language or age? <a class="u" href="contact.html">Tell us</a> and we'll cast it.<br>Are you a voice artist? <a class="u" href="contact.html?formType=Artist">Send us your demo.</a></p>
+<div class="picker rv">
+<label class="label" for="voice-select">( Choose a voice )</label>
+<div class="picker-row"><select id="voice-select" aria-label="Choose a voice"></select>
+<button class="play big" id="voice-play" type="button" aria-label="Play selected voice"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></button></div>
+<p class="picker-meta" id="voice-meta"></p>
+<div class="picker-bar"><i id="voice-progress"></i></div>
+</div>
+<p class="muted rv" style="margin-top:72px">Need a specific voice, language or age? <a class="u" href="contact.html">Tell us</a> and we'll cast it.<br>Are you a voice artist? <a class="u" href="contact.html?formType=Artist">Send us your demo.</a></p>
 </div></section>
+<script>
+(function(){var sel=document.getElementById("voice-select"),btn=document.getElementById("voice-play"),meta=document.getElementById("voice-meta"),bar=document.getElementById("voice-progress"),a=new Audio(),list=[];
+var P='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>',S='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>';
+function show(){var v=list[sel.selectedIndex];if(!v)return;meta.textContent=[v.gender,v.languages,v.style].filter(Boolean).join("  ·  ");}
+fetch("data/voices.json",{cache:"no-cache"}).then(function(r){return r.json()}).then(function(d){list=d.voices||[];sel.innerHTML=list.map(function(v,i){return '<option value="'+i+'">'+v.name+(v.gender?" — "+v.gender:"")+'</option>'}).join("");show();});
+sel.addEventListener("change",function(){a.pause();a.removeAttribute("src");bar.style.width="0";show();btn.click();});
+btn.addEventListener("click",function(){var v=list[sel.selectedIndex];if(!v)return;if(!a.src||a.src.indexOf(v.src)<0){a.src=v.src;}
+if(a.paused){document.querySelectorAll("video,audio").forEach(function(m){m.pause()});a.play();}else a.pause();});
+a.addEventListener("play",function(){btn.innerHTML=S;btn.classList.add("on")});a.addEventListener("pause",function(){btn.innerHTML=P;btn.classList.remove("on")});
+a.addEventListener("ended",function(){btn.innerHTML=P;btn.classList.remove("on");bar.style.width="0"});
+a.addEventListener("timeupdate",function(){bar.style.width=(a.currentTime/(a.duration||1)*100)+"%"});})();
+</script>
 """ + FOOT
 
 PAGES["work.html"] = lambda: head("Portfolio: Hindi Dubbing & Voice-Over Samples | SmokyDuck Studio – Indic & Global Multimedia Localization",

@@ -1,0 +1,13 @@
+{
+  "_readme": "Voices shown in the drop-down on the Voices page. Add one block per artist (with their consent). 'src' = an MP3 in assets/media.",
+  "voices": [
+    {
+      "id": "gagan",
+      "name": "Gagan",
+      "gender": "Male",
+      "languages": "Hindi · Urdu · English",
+      "style": "TV commercials, dubbing, animation",
+      "src": "assets/media/audio-hindi-tvc.mp3"
+    }
+  ]
+}
