@@ -14,28 +14,6 @@
       "notes": "PLACEHOLDER — the single most important demo for outreach. Add the raw AI output and your finished version of the same 30–60 second clip."
     },
     {
-      "id": "ad-01",
-      "featured": true,
-      "kind": "video",
-      "title": "Hindi TV commercial: sports retail",
-      "service": "Hindi voice-over",
-      "languages": "Hindi",
-      "client": "Co-founder's voice work",
-      "embed": "https://drive.google.com/file/d/1kEafpcjuxHdWgCRQ5Ci6ZZBAfs9CZ73o/preview",
-      "driveCopy": "1kEafpcjuxHdWgCRQ5Ci6ZZBAfs9CZ73o"
-    },
-    {
-      "id": "ad-02",
-      "featured": true,
-      "kind": "video",
-      "title": "Hindi TV commercial: navigation app",
-      "service": "Hindi voice-over",
-      "languages": "Hindi",
-      "client": "Co-founder's voice work",
-      "embed": "https://drive.google.com/file/d/1q2-u1YweeFdak8ubaCl6o2JLgC3BxNTb/preview",
-      "driveCopy": "1q2-u1YweeFdak8ubaCl6o2JLgC3BxNTb"
-    },
-    {
       "id": "dub-01",
       "featured": true,
       "kind": "video",
@@ -56,17 +34,6 @@
       "client": "Co-founder's voice work",
       "embed": "https://drive.google.com/file/d/12oyhp5wOGRW5wvDL069GVXJG0CKxcWQo/preview",
       "driveCopy": "12oyhp5wOGRW5wvDL069GVXJG0CKxcWQo"
-    },
-    {
-      "id": "dub-02",
-      "featured": false,
-      "kind": "video",
-      "title": "Hindi YouTube dub: two voices",
-      "service": "Dubbing",
-      "languages": "Hindi",
-      "client": "Co-founder's voice work",
-      "embed": "https://drive.google.com/file/d/1uXp90J0rjS70wwpjU5h_vEN1xJOnfG5L/preview",
-      "driveCopy": "1uXp90J0rjS70wwpjU5h_vEN1xJOnfG5L"
     },
     {
       "id": "ad-04",
@@ -150,7 +117,36 @@
     {
       "title": "Hindi feature dub (film rights: keep private unless the rights holder allows a clip)",
       "driveCopy": "1-O0migOO7P7kHynkXhJQBJRafptWDRFn"
+    },
+    {
+      "title": "Hindi YouTube dub: two voices (needs second voice's consent)",
+      "driveCopy": "1uXp90J0rjS70wwpjU5h_vEN1xJOnfG5L"
     }
   ],
-  "_note": "Embeds point to renamed copies in Yasir's Drive (folder 'smokyDuck — Website samples'). They only play publicly once each file is shared as 'Anyone with the link: Viewer'. Brand names deliberately left out of titles: this is the co-founder's work from before smokyDuck, not studio clients."
+  "_note": "Embeds point to renamed copies in Yasir's Drive, shared as 'Anyone with the link: Viewer' on 22 Nov 2026. Brand names left out of titles: co-founder's pre-SmokyDuck work, not studio clients.",
+  "_pendingShare": [
+    {
+      "id": "ad-01",
+      "featured": true,
+      "kind": "video",
+      "title": "Hindi TV commercial: sports retail",
+      "service": "Hindi voice-over",
+      "languages": "Hindi",
+      "client": "Co-founder's voice work",
+      "embed": "https://drive.google.com/file/d/1kEafpcjuxHdWgCRQ5Ci6ZZBAfs9CZ73o/preview",
+      "driveCopy": "1kEafpcjuxHdWgCRQ5Ci6ZZBAfs9CZ73o"
+    },
+    {
+      "id": "ad-02",
+      "featured": true,
+      "kind": "video",
+      "title": "Hindi TV commercial: navigation app",
+      "service": "Hindi voice-over",
+      "languages": "Hindi",
+      "client": "Co-founder's voice work",
+      "embed": "https://drive.google.com/file/d/1q2-u1YweeFdak8ubaCl6o2JLgC3BxNTb/preview",
+      "driveCopy": "1q2-u1YweeFdak8ubaCl6o2JLgC3BxNTb"
+    }
+  ],
+  "_pendingShareNote": "Share these two Drive copies as 'Anyone with the link: Viewer', then move them back into items."
 }

@@ -8,7 +8,7 @@ window.SD_CONFIG = {
 
   // WhatsApp Business number: country code + number, digits only.
   // Example for India: "919812345678"   (no +, no spaces)
-  whatsapp: "",
+  whatsapp: "918866666447",
 
   // Paste your Google Apps Script "Web app" URL here (see automation/SETUP.md).
   // Until it is set, forms open the visitor's email app with everything pre-filled.

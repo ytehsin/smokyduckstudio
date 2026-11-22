@@ -8,9 +8,9 @@ TODAY = datetime.date.today().isoformat()
 E = html.escape
 NAV = [("services.html", "Services"), ("voices.html", "Voices"), ("work.html", "Work"), ("contact.html", "Contact")]
 
-ORG = {"@context": "https://schema.org", "@type": "ProfessionalService", "@id": BASE + "#org", "name": "smokyDuck Studio",
+ORG = {"@context": "https://schema.org", "@type": "ProfessionalService", "@id": BASE + "#org", "name": "SmokyDuck Studio", "alternateName": "SmokyDuck Studio – Indic & Global Multimedia Localization", "slogan": "Indic & Global Multimedia Localization",
        "url": BASE, "email": "hello@smokyduckstudio.com", "logo": BASE + "assets/img/logo-512.png",
-       "description": "Human voice-over, dubbing, translation and subtitling in all Indian languages, with separate AI dubbing services.",
+       "description": "Hindi dubbing studio and Indian language localisation company: human voice-over, dubbing, translation, subtitling and e-learning localisation in all Indian languages, plus separate AI services.",
        "areaServed": ["IN", "GB", "US", "AE"], "knowsLanguage": ["hi","bn","mr","te","ta","gu","ur","kn","ml","or","pa","as","en"]}
 
 def head(title, desc, path, extra=None, robots="index,follow"):
@@ -27,7 +27,7 @@ def head(title, desc, path, extra=None, robots="index,follow"):
 <meta name="robots" content="{robots}">
 <link rel="canonical" href="{url}">
 <meta name="theme-color" content="#0a0a0a">
-<meta property="og:type" content="website"><meta property="og:site_name" content="smokyDuck Studio">
+<meta property="og:type" content="website"><meta property="og:site_name" content="SmokyDuck Studio – Indic &amp; Global Multimedia Localization">
 <meta property="og:title" content="{E(title)}"><meta property="og:description" content="{E(desc)}">
 <meta property="og:url" content="{url}"><meta property="og:image" content="{BASE}assets/img/og-default.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -54,9 +54,9 @@ FOOT = """</main>
 <footer id="contact"><div class="wrap">
 <div class="rv"><h2>Ready to<br>go global?</h2>
 <a class="mail u" data-email href="mailto:hello@smokyduckstudio.com">hello@smokyduckstudio.com</a>
-<a class="wa u" data-wa href="#">WhatsApp us →</a></div>
+<a class="wa u" data-wa href="#">WhatsApp +91 88666 66447 →</a></div>
 <div class="foot"><nav><a class="u" data-social="instagram" href="#">Instagram</a><a class="u" data-social="linkedin" href="#">LinkedIn</a><a class="u" data-social="youtube" href="#">YouTube</a><a class="u" href="legal.html">Privacy &amp; Terms</a></nav>
-<span class="c">© <span data-year>2026</span> smokyDuck. All rights reserved.</span></div>
+<span class="c">© <span data-year>2026</span> SmokyDuck Studio – Indic &amp; Global Multimedia Localization</span></div>
 </div></footer>
 <div class="consent" id="consent" role="dialog" aria-label="Cookies"><p style="margin:0">May we use Google Analytics to see which pages are useful? It sets cookies only if you allow it.</p>
 <button class="btn" data-consent="yes" type="button">Allow</button><button class="btn" data-consent="no" type="button">No thanks</button></div>
@@ -75,10 +75,10 @@ LANGS = "Hindi · Bengali · Marathi · Telugu · Tamil · Gujarati · Urdu · K
 SERVICES = [
     ("Voice-Over", "Real human voice artists in every Indian language — for commercials, e-learning, explainers, documentaries, IVR and corporate films. Cast, directed and delivered as finished audio.",
      ["Commercials and brand films", "E-learning and training", "Documentary narration", "IVR and announcements"]),
-    ("Dubbing", "Human dubbing for films, series, animation and YouTube — performed by native voice actors, synced to picture and mixed for broadcast.",
+    ("Dubbing", "A Hindi dubbing studio that also dubs into every other Indian language. Human dubbing for films, series, animation and YouTube — performed by native voice actors, synced to picture and mixed for broadcast.",
      ["Films, series and OTT", "Animation and character voices", "YouTube and digital content", "Lip-sync and voice matching"]),
     ("Translation", "Professional translation and localisation between English and all Indian languages, by native linguists. Documents, websites, apps, scripts, courses and marketing — not just for voice-over.",
-     ["Documents and business content", "Websites, apps and software", "E-learning and courses", "Marketing and transcreation"]),
+     ["Indian language localisation", "E-learning localisation", "Websites, apps and documents", "Marketing and transcreation"]),
     ("Subtitling", "Accurate, perfectly timed subtitles and clean transcripts in any Indian language, delivered with your project or on their own.",
      ["Subtitles in all Indian languages", "SRT and VTT files", "Transcription", "Burned-in captions for social"]),
 ]
@@ -93,6 +93,7 @@ FAQ = [
     ("Which languages do you work in?", "All Indian languages — including Hindi, Bengali, Marathi, Telugu, Tamil, Gujarati, Urdu, Kannada, Malayalam, Odia, Punjabi and Assamese — plus English. Tell us the pair you need."),
     ("Are your voice-overs done by real people?", "Yes. Our voice-over and dubbing services use real human voice artists only. AI voices are a separate service that you choose explicitly."),
     ("What's the difference between your human and AI services?", "Human services are performed by voice artists and linguists. AI services are faster and cheaper, for projects where speed and volume matter more than performance. They are quoted separately, and we never mix them without telling you."),
+    ("Do you localise e-learning courses?", "Yes. E-learning localisation is a core service: translated course content, quizzes and on-screen text, plus human voice-over and subtitles, in any Indian language."),
     ("Do you translate without voice-over?", "Yes. Translation is a service on its own — documents, websites, apps, courses and marketing in any Indian language."),
     ("How do you price?", "Voice-over and dubbing per finished minute, translation per word. Send the script or file and we'll quote the same day where we can."),
     ("Will you sign an NDA?", "Yes, before you share any files."),
@@ -104,16 +105,17 @@ def faq_ld(items): return {"@context": "https://schema.org", "@type": "FAQPage",
 
 PAGES = {}
 
-PAGES["index.html"] = lambda: head("smokyDuck | Voice-Over, Dubbing & Translation in All Indian Languages",
-    "Human voice-over, dubbing, translation and subtitling in every Indian language. Real voice artists and native linguists, plus separate AI dubbing services.", "index.html") + nav("") + f"""
+PAGES["index.html"] = lambda: head("SmokyDuck Studio – Indic & Global Multimedia Localization | Hindi Dubbing Studio",
+    "SmokyDuck Studio is a Hindi dubbing studio and Indian language localisation company: human voice-over, dubbing, translation and e-learning localisation in every Indian language.", "index.html") + nav("") + f"""
 <header class="hero"><div class="glow" aria-hidden="true"></div>
 <h1 class="rv">smoky<span class="d">D</span>uck.</h1>
-<p class="tagline rv"><span>Global Voices.</span> <span>Human Craft.</span> <span>AI Speed.</span></p>
+<p class="tagline rv">Indic &amp; Global Multimedia Localization</p>
+<p class="tagline2 rv"><span>Global Voices.</span> <span>Human Craft.</span> <span>AI Speed.</span></p>
 <p class="scroll" aria-hidden="true">Scroll to explore</p></header>
 
 <section class="sec"><div class="wrap statement">
 <p class="label rv">( Who We Are )</p>
-<h2 class="rv">A voice and language studio for every Indian language. Real voice artists and native linguists who make your content sound like it was made here — not translated.</h2>
+<h2 class="rv">SmokyDuck Studio is a Hindi dubbing studio and Indian language localisation company. Real voice artists and native linguists who make your content sound like it was made here — not translated.</h2>
 </div></section>
 
 <section class="sec light"><div class="wrap">
@@ -135,8 +137,8 @@ PAGES["index.html"] = lambda: head("smokyDuck | Voice-Over, Dubbing & Translatio
 
 """ + FOOT
 
-PAGES["services.html"] = lambda: head("Services | Voice-Over, Dubbing, Translation & Subtitling in Indian Languages | smokyDuck",
-    "Human voice-over, dubbing, translation and subtitling in every Indian language, plus separate AI dubbing, AI video and AI-assisted translation services.", "services.html", [faq_ld(FAQ)]) + nav("services.html") + \
+PAGES["services.html"] = lambda: head("Hindi Dubbing, Voice-Over & E-learning Localisation | SmokyDuck Studio – Indic & Global Multimedia Localization",
+    "Hindi dubbing, voice-over, translation, subtitling and e-learning localisation in all Indian languages by real voice artists and native linguists, plus separate AI services.", "services.html", [faq_ld(FAQ)]) + nav("services.html") + \
     pagehead("Services", "What we <em>do.</em>", "Two studios. Our human studio — real voice artists and native linguists in every Indian language. And a separate AI studio for speed and scale.") + f"""
 <section class="sec light"><div class="wrap"><p class="label rv" style="color:#5f5f5a">( Human Studio )</p><h2 class="big rv" style="font-size:clamp(44px,6vw,84px)">Real people.</h2><div class="rows">
 {"".join(f'<div class="row rv" id="{t.lower().replace("-","").replace(" ","")}"><span class="n">0{i+1}</span><div><h3>{t}</h3><p>{d}</p><ul>{"".join(f"<li>{x}</li>" for x in l)}</ul></div></div>' for i,(t,d,l) in enumerate(SERVICES))}
@@ -151,8 +153,8 @@ PAGES["services.html"] = lambda: head("Services | Voice-Over, Dubbing, Translati
 </div></section>
 """ + FOOT
 
-PAGES["voices.html"] = lambda: head("Voices | Voice Artists in All Indian Languages | smokyDuck",
-    "Listen to smokyDuck's human voice artists across Indian languages. Play samples and enquire about any voice.", "voices.html") + nav("voices.html") + \
+PAGES["voices.html"] = lambda: head("Voice Artists in All Indian Languages | SmokyDuck Studio – Indic & Global Multimedia Localization",
+    "Listen to SmokyDuck Studio's human voice artists across Indian languages. Play samples and enquire about any voice.", "voices.html") + nav("voices.html") + \
     pagehead("Voices", "Our <em>voices.</em>", "Real human voice artists across Indian languages. Press play — when you hear the one, ask us about it.") + """
 <section class="sec" style="padding-top:64px"><div class="wrap">
 <div class="filters" role="search" aria-label="Filter voices">
@@ -167,20 +169,20 @@ PAGES["voices.html"] = lambda: head("Voices | Voice Artists in All Indian Langua
 <dialog id="voice-dialog" aria-label="Voice profile"><button class="close" type="button" aria-label="Close">×</button><div class="dlg"></div></dialog>
 """ + FOOT
 
-PAGES["work.html"] = lambda: head("Work | Voice-Over & Dubbing Samples | smokyDuck",
-    "Commercials, animation dubbing, YouTube dubs and narration voiced by the smokyDuck team.", "work.html") + nav("work.html") + \
-    pagehead("Our Work", "Featured <em>Projects.</em>", "Voice-over, dubbing and narration by our team — real voices, real projects.") + """
+PAGES["work.html"] = lambda: head("Portfolio: Hindi Dubbing & Voice-Over Samples | SmokyDuck Studio – Indic & Global Multimedia Localization",
+    "Watch and listen: Hindi dubbing, animation dubbing, commercials and narration by the SmokyDuck Studio team.", "work.html") + nav("work.html") + \
+    pagehead("Portfolio", "Featured <em>Projects.</em>", "Hindi dubbing, animation, commercials and narration by our team. Real voices, real projects.") + """
 <section class="sec" style="padding-top:80px"><div class="wrap"><div data-work="all"></div></div></section>
 """ + FOOT
 
 NEEDS = ["Voice-over (human)", "Dubbing (human)", "Translation", "Subtitling", "AI services", "Something else"]
-PAGES["contact.html"] = lambda: head("Contact | smokyDuck Studio",
+PAGES["contact.html"] = lambda: head("Contact | SmokyDuck Studio – Indic & Global Multimedia Localization",
     "Get a quote for voice-over, dubbing, translation or subtitling in any Indian language. Email, WhatsApp or send us your brief.", "contact.html") + nav("contact.html") + \
     pagehead("Contact", "Let's <em>talk.</em>", "Tell us what you're making. We'll reply with a price and a plan.") + f"""
 <section class="sec light"><div class="wrap contact">
 <div class="ways rv"><p class="label">( Write or call )</p>
 <a class="u" data-email href="mailto:hello@smokyduckstudio.com">hello@smokyduckstudio.com</a><br>
-<a class="u" data-wa href="#">WhatsApp →</a></div>
+<a class="u" data-wa href="#">+91 88666 66447</a><br><span class="muted" style="font-size:14px">WhatsApp or call</span></div>
 <form class="form rv" data-sd-form novalidate>
 <input type="hidden" name="formType" value="Quote"><label class="hp" aria-hidden="true">Leave empty<input name="website_hp" tabindex="-1" autocomplete="off"></label>
 <div class="f2"><div><label for="c-name">Name *</label><input id="c-name" name="name" autocomplete="name" required></div>
@@ -190,17 +192,17 @@ PAGES["contact.html"] = lambda: head("Contact | smokyDuck Studio",
 <div class="f2"><div><label for="c-lang">Languages</label><input id="c-lang" name="targetLanguages" placeholder="e.g. English → Tamil, Bengali"></div>
 <div><label for="c-voice">Voice (optional)</label><input id="c-voice" name="voice" placeholder="A voice from our roster, or the sound you want"></div></div>
 <div><label for="c-msg">Tell us about the project *</label><textarea id="c-msg" name="message" required placeholder="Length, deadline, where it will be used, a link to the script or video…"></textarea></div>
-<label class="check"><input type="checkbox" name="consent" value="yes" required><span>I agree smokyDuck may keep these details to reply to me (<a href="legal.html">privacy</a>).</span></label>
+<label class="check"><input type="checkbox" name="consent" value="yes" required><span>I agree SmokyDuck Studio may keep these details to reply to me (<a href="legal.html">privacy</a>).</span></label>
 <div class="status" role="status" aria-live="polite"></div>
 <div><button class="btn" type="submit">Send</button></div>
 </form></div></section>
 """ + FOOT
 
-PAGES["legal.html"] = lambda: head("Privacy & Terms | smokyDuck Studio", "How smokyDuck handles your data, and the terms for our services.", "legal.html") + nav("") + \
+PAGES["legal.html"] = lambda: head("Privacy & Terms | SmokyDuck Studio – Indic & Global Multimedia Localization", "How SmokyDuck Studio handles your data, and the terms for our services.", "legal.html") + nav("") + \
     pagehead("Legal", "Privacy &amp; <em>Terms.</em>", f"Last updated {TODAY}.") + """
 <section class="sec" style="padding-top:40px"><div class="wrap prose">
 <h2>Privacy</h2>
-<p>smokyDuck Studio runs smokyduckstudio.com. Questions about your data: hello@smokyduckstudio.com.</p>
+<p>SmokyDuck Studio runs smokyduckstudio.com. Questions about your data: hello@smokyduckstudio.com.</p>
 <p><strong>What we collect.</strong> What you send through the contact form or by email or WhatsApp (your name, email, company and project details), and the files you share for a project. If you allow it, Google Analytics records anonymous page visits.</p>
 <p><strong>Why.</strong> To reply to you, quote, deliver and invoice work. We don't sell your data or add you to mailing lists.</p>
 <p><strong>Who sees it.</strong> Our team, and the voice artists or linguists working on your project under confidentiality. We use Google (email, Drive, Sheets) and GitHub Pages (hosting) to run the business.</p>
@@ -218,7 +220,7 @@ PAGES["legal.html"] = lambda: head("Privacy & Terms | smokyDuck Studio", "How sm
 """ + FOOT
 
 def notfound():
-    s = head("Page not found | smokyDuck", "This page doesn't exist.", "404.html", robots="noindex") + nav("") + \
+    s = head("Page not found | SmokyDuck Studio – Indic & Global Multimedia Localization", "This page doesn't exist.", "404.html", robots="noindex") + nav("") + \
         pagehead("404", "Dead <em>air.</em>", 'This page doesn\'t exist. <a class="u" href="index.html" style="color:#f4f4f0">Back home →</a>') + FOOT
     s = re.sub(r'(href|src)="(?!https?:|mailto:|#|/)([^"]+)"', r'\1="/\2"', s)
     return s
