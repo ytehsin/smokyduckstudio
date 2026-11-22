@@ -6,7 +6,7 @@ OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 BASE = "https://smokyduckstudio.com/"
 TODAY = datetime.date.today().isoformat()
 E = html.escape
-NAV = [("services.html", "Services"), ("voices.html", "Voices"), ("work.html", "Work"), ("contact.html", "Contact")]
+NAV = [("about.html", "Who We Are"), ("services.html", "Services"), ("voices.html", "Voices"), ("work.html", "Work"), ("contact.html", "Contact")]
 
 ORG = {"@context": "https://schema.org", "@type": "ProfessionalService", "@id": BASE + "#org", "name": "SmokyDuck Studio", "alternateName": "SmokyDuck Studio – Indic & Global Multimedia Localization", "slogan": "Indic & Global Multimedia Localization",
        "url": BASE, "email": "hello@smokyduckstudio.com", "logo": BASE + "assets/img/logo-512.png",
@@ -33,7 +33,7 @@ def head(title, desc, path, extra=None, robots="index,follow"):
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<link rel="stylesheet" href="assets/css/site.css?v=5">
+<link rel="stylesheet" href="assets/css/site.css?v=6">
 {ldh}
 </head>
 <body>
@@ -60,9 +60,9 @@ FOOT = """</main>
 </div></footer>
 <div class="consent" id="consent" role="dialog" aria-label="Cookies"><p style="margin:0">May we use Google Analytics to see which pages are useful? It sets cookies only if you allow it.</p>
 <button class="btn" data-consent="yes" type="button">Allow</button><button class="btn" data-consent="no" type="button">No thanks</button></div>
-<script src="assets/js/config.js?v=5"></script>
-<script src="assets/js/site.js?v=5" defer></script>
-<script src="assets/js/data.js?v=5" defer></script>
+<script src="assets/js/config.js?v=6"></script>
+<script src="assets/js/site.js?v=6" defer></script>
+<script src="assets/js/data.js?v=6" defer></script>
 </body>
 </html>
 """
@@ -113,10 +113,9 @@ PAGES["index.html"] = lambda: head("SmokyDuck Studio – Indic & Global Multimed
 <p class="tagline2 rv"><span>Global Voices.</span> <span>Human Craft.</span> <span>AI Speed.</span></p>
 <p class="scroll" aria-hidden="true">Scroll to explore</p></header>
 
-<section class="sec"><div class="wrap about">
-<div><p class="label rv">( Who We Are )</p>
-<h2 class="rv">SmokyDuck Studio is a Hindi dubbing studio and Indian language localisation company. Real voice artists and native linguists who make your content sound like it was made here — not translated.</h2></div>
-<div class="reel big rv"><video controls playsinline preload="metadata" poster="assets/media/voices-reel.jpg" src="assets/media/voices-reel.mp4" aria-label="Gagan, co-founder, on SmokyDuck Studio"></video></div>
+<section class="sec"><div class="wrap statement">
+<p class="label rv">( Who We Are )</p>
+<h2 class="rv">SmokyDuck Studio is a Hindi dubbing studio and Indian language localisation company. Real voice artists and native linguists who make your content sound like it was made here — not translated.</h2>
 </div></section>
 
 <section class="sec light"><div class="wrap">
@@ -136,6 +135,39 @@ PAGES["index.html"] = lambda: head("SmokyDuck Studio – Indic & Global Multimed
 <div class="ai-list rv">{"".join(f'<div><h4>{i+1}. {t}</h4><p class="muted">{d}</p></div>' for i,(t,d) in enumerate(AI_SERVICES))}</div>
 </div></section>
 
+""" + FOOT
+
+PAGES["about.html"] = lambda: head("Who We Are | SmokyDuck Studio – Indic & Global Multimedia Localization",
+    "SmokyDuck Studio is an Indic and global multimedia localization studio: human voice-over, dubbing, translation and e-learning localisation in every Indian language.", "about.html") + nav("about.html") + \
+    pagehead("Who We Are", "Who we <em>are.</em>", "SmokyDuck Studio – Indic &amp; Global Multimedia Localization.") + """
+<section class="sec"><div class="wrap about">
+<div class="rv">
+<p class="label">( Our Story )</p>
+<h2>A voice and language studio built by people who work in it every day.</h2>
+<p class="muted" style="font-size:19px;font-weight:300;margin-top:28px;max-width:560px">SmokyDuck Studio was founded by Yasir and Gagan to take content into every Indian language, and to bring Indian voices to the world. We work with real voice artists and native linguists, so what you publish sounds like it was made for its audience, not translated for it.</p>
+<p class="muted" style="font-size:19px;font-weight:300;max-width:560px">From TV commercials and animation to e-learning courses and corporate films, we handle voice-over, dubbing, translation and subtitling end to end.</p>
+</div>
+<div class="reel big rv"><video controls playsinline preload="metadata" poster="assets/media/voices-reel.jpg" src="assets/media/voices-reel.mp4" aria-label="Gagan, co-founder, introduces SmokyDuck Studio"></video></div>
+</div></section>
+
+<section class="sec light"><div class="wrap">
+<p class="label rv" style="color:#5f5f5a">( What We Believe )</p>
+<div class="rows rv">
+<div class="row"><span class="n">01</span><div><h3>Human voices first</h3><p>Our voice-over and dubbing are performed by real artists. A voice carries emotion, timing and culture that an audience feels.</p></div></div>
+<div class="row"><span class="n">02</span><div><h3>Every Indian language</h3><p>Hindi, Bengali, Marathi, Telugu, Tamil, Gujarati, Urdu, Kannada, Malayalam, Odia, Punjabi, Assamese and more, plus English, each handled by native speakers.</p></div></div>
+<div class="row"><span class="n">03</span><div><h3>Human and AI, kept apart</h3><p>Our AI services are a separate offering for speed and scale. We never mix them into human work without telling you.</p></div></div>
+<div class="row"><span class="n">04</span><div><h3>Artists come first</h3><p>We never publish, share or clone an artist's voice without their written consent, and every recording is licensed for an agreed use.</p></div></div>
+</div></div></section>
+
+<section class="sec"><div class="wrap statement">
+<p class="label rv">( How We Work )</p>
+<div class="ai-list rv">
+<div><h4>1. Brief</h4><p class="muted">Send the script, video or file, the languages and your deadline.</p></div>
+<div><h4>2. Cast &amp; plan</h4><p class="muted">We match voices or linguists to your project and confirm price and timeline.</p></div>
+<div><h4>3. Record &amp; translate</h4><p class="muted">Directed recording sessions and native translation, synced to picture where needed.</p></div>
+<div><h4>4. Check &amp; deliver</h4><p class="muted">A second native speaker reviews everything before delivery in the formats you need.</p></div>
+</div>
+</div></section>
 """ + FOOT
 
 PAGES["services.html"] = lambda: head("Hindi Dubbing, Voice-Over & E-learning Localisation | SmokyDuck Studio – Indic & Global Multimedia Localization",
