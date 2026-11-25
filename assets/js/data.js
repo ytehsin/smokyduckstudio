@@ -47,7 +47,7 @@
       var vids = items.filter(function (x) { return x.kind !== "audio"; }), auds = items.filter(function (x) { return x.kind === "audio"; });
       box.innerHTML = '<div class="grid">' + vids.map(function (x, i) {
         return '<article class="item rv">' + video(x) + '<div class="meta"><div><h3>' + esc(x.title) + "</h3><p>" + esc(x.service) + " · " + esc(x.languages) + '</p></div><span class="num">' + pad(i) + "</span></div></article>";
-      }).join("") + "</div>" + (auds.length ? '<div style="margin-top:96px"><p class="label">( Audio )</p>' + auds.map(function (x) {
+      }).join("") + "</div>" + (false ? '<div style="margin-top:96px"><p class="label">( Audio )</p>' + auds.map(function (x) {
         return '<div class="audio">' + playBtn(x.audio, x.title) + "<div><h3>" + esc(x.title) + "</h3><p>" + esc(x.service) + " · " + esc(x.languages) + "</p></div></div>";
       }).join("") + "</div>" : "");
       reveal(box);

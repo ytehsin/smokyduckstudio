@@ -40,53 +40,6 @@
       "languages": "Hindi",
       "embed": "https://drive.google.com/file/d/11dyVA39ErhPNSrjjjBdA6TPGRX44MHOi/preview",
       "thumb": "https://drive.google.com/thumbnail?id=11dyVA39ErhPNSrjjjBdA6TPGRX44MHOi&sz=w1280"
-    },
-    {
-      "id": "corp-infra",
-      "featured": false,
-      "kind": "drive",
-      "title": "Hindi corporate film: infrastructure",
-      "service": "Voice-over",
-      "languages": "Hindi",
-      "embed": "https://drive.google.com/file/d/1DRnGc6KQrW8-EYAHslc6QVRkC8lRzXiX/preview",
-      "thumb": "https://drive.google.com/thumbnail?id=1DRnGc6KQrW8-EYAHslc6QVRkC8lRzXiX&sz=w1280"
-    },
-    {
-      "id": "film-andaaz",
-      "featured": false,
-      "kind": "drive",
-      "title": "English-language version: Andaaz",
-      "service": "Dubbing",
-      "languages": "English",
-      "embed": "https://drive.google.com/file/d/1rEVwhdBzf7No-FUWXVWs5Z8NEec34ca2/preview",
-      "thumb": "https://drive.google.com/thumbnail?id=1rEVwhdBzf7No-FUWXVWs5Z8NEec34ca2&sz=w1280"
-    },
-    {
-      "id": "audio-hindi-tvc",
-      "featured": false,
-      "kind": "audio",
-      "title": "Hindi TV commercial",
-      "service": "Voice-over",
-      "languages": "Hindi",
-      "audio": "assets/media/audio-hindi-tvc.mp3"
-    },
-    {
-      "id": "audio-urdu-doc",
-      "featured": false,
-      "kind": "audio",
-      "title": "Urdu documentary narration",
-      "service": "Narration",
-      "languages": "Urdu",
-      "audio": "assets/media/audio-urdu-documentary.mp3"
-    },
-    {
-      "id": "audio-urdu-narr",
-      "featured": false,
-      "kind": "audio",
-      "title": "Urdu narration",
-      "service": "Narration",
-      "languages": "Urdu",
-      "audio": "assets/media/audio-urdu-narration.mp3"
     }
   ],
   "_privateNotInSite": [
@@ -124,5 +77,6 @@
       "driveCopy": "1q2-u1YweeFdak8ubaCl6o2JLgC3BxNTb"
     }
   ],
-  "_pendingShareNote": "Share these two Drive copies as 'Anyone with the link: Viewer', then move them back into items."
+  "_pendingShareNote": "Share these two Drive copies as 'Anyone with the link: Viewer', then move them back into items.",
+  "seeMore": "https://drive.google.com/drive/folders/1brroOrcgjQAq9oTcISWgFzOkKJaJQJRE"
 }

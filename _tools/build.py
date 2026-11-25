@@ -6,7 +6,7 @@ OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 BASE = "https://smokyduckstudio.com/"
 TODAY = datetime.date.today().isoformat()
 E = html.escape
-NAV = [("about.html", "Who We Are"), ("services.html", "Services"), ("voices.html", "Voices"), ("work.html", "Work"), ("contact.html", "Contact")]
+NAV = [("about.html", "Who We Are"), ("services.html", "Services"), ("work.html", "Work"), ("contact.html", "Contact")]
 
 ORG = {"@context": "https://schema.org", "@type": "ProfessionalService", "@id": BASE + "#org", "name": "SmokyDuck Studio", "alternateName": "SmokyDuck Studio – Indic & Global Multimedia Localization", "slogan": "Indic & Global Multimedia Localization",
        "url": BASE, "email": "hello@smokyduckstudio.com", "logo": BASE + "assets/img/logo-512.png",
@@ -33,7 +33,7 @@ def head(title, desc, path, extra=None, robots="index,follow"):
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<link rel="stylesheet" href="assets/css/site.css?v=6">
+<link rel="stylesheet" href="assets/css/site.css?v=7">
 {ldh}
 </head>
 <body>
@@ -60,9 +60,9 @@ FOOT = """</main>
 </div></footer>
 <div class="consent" id="consent" role="dialog" aria-label="Cookies"><p style="margin:0">May we use Google Analytics to see which pages are useful? It sets cookies only if you allow it.</p>
 <button class="btn" data-consent="yes" type="button">Allow</button><button class="btn" data-consent="no" type="button">No thanks</button></div>
-<script src="assets/js/config.js?v=6"></script>
-<script src="assets/js/site.js?v=6" defer></script>
-<script src="assets/js/data.js?v=6" defer></script>
+<script src="assets/js/config.js?v=7"></script>
+<script src="assets/js/site.js?v=7" defer></script>
+<script src="assets/js/data.js?v=7" defer></script>
 </body>
 </html>
 """
@@ -143,9 +143,9 @@ PAGES["about.html"] = lambda: head("Who We Are | SmokyDuck Studio – Indic & Gl
 <section class="sec"><div class="wrap about">
 <div class="rv">
 <p class="label">( Our Story )</p>
-<h2>A voice and language studio built by people who work in it every day.</h2>
-<p class="muted" style="font-size:19px;font-weight:300;margin-top:28px;max-width:560px">SmokyDuck Studio was founded by Yasir and Gagan to take content into every Indian language, and to bring Indian voices to the world. We work with real voice artists and native linguists, so what you publish sounds like it was made for its audience, not translated for it.</p>
-<p class="muted" style="font-size:19px;font-weight:300;max-width:560px">From TV commercials and animation to e-learning courses and corporate films, we handle voice-over, dubbing, translation and subtitling end to end.</p>
+<h2>Bringing languages and voices closer to their audiences.</h2>
+<p class="muted" style="font-size:19px;font-weight:300;margin-top:28px;max-width:560px">Founded in Agra, SmokyDuck Studio brings languages and voices closer to audiences across India and around the world. With recording studios in Agra, Delhi and Mumbai, we combine professional voice artists and native-language linguists to create content that sounds natural, connects culturally and speaks directly to its intended audience.</p>
+<p class="muted" style="font-size:19px;font-weight:300;max-width:560px">From translation and localisation to voice-over, dubbing and subtitling, we offer end-to-end language solutions for TV commercials, animation, e-learning, corporate films and digital content. Whether it's adapting a message into another language or bringing a character to life in a different voice, we make sure nothing gets lost in translation.</p>
 </div>
 <div class="reel big rv"><video controls playsinline preload="metadata" poster="assets/media/voices-reel.jpg" src="assets/media/voices-reel.mp4" aria-label="Gagan, co-founder, introduces SmokyDuck Studio"></video></div>
 </div></section>
@@ -186,37 +186,11 @@ PAGES["services.html"] = lambda: head("Hindi Dubbing, Voice-Over & E-learning Lo
 </div></section>
 """ + FOOT
 
-PAGES["voices.html"] = lambda: head("Voices of Our Artists | SmokyDuck Studio – Indic & Global Multimedia Localization",
-    "Choose a voice and listen live: real human voice artists from SmokyDuck Studio across Indian languages.", "voices.html") + nav("voices.html") + \
-    pagehead("Voices", "Voices of our <em>artists.</em>", "Pick a voice and press play.") + """
-<section class="sec" style="padding-top:72px"><div class="wrap">
-<div class="picker rv">
-<label class="label" for="voice-select">( Choose a voice )</label>
-<div class="picker-row"><select id="voice-select" aria-label="Choose a voice"></select>
-<button class="play big" id="voice-play" type="button" aria-label="Play selected voice"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg></button></div>
-<p class="picker-meta" id="voice-meta"></p>
-<div class="picker-bar"><i id="voice-progress"></i></div>
-</div>
-<p class="muted rv" style="margin-top:72px">Need a specific voice, language or age? <a class="u" href="contact.html">Tell us</a> and we'll cast it.<br>Are you a voice artist? <a class="u" href="contact.html?formType=Artist">Send us your demo.</a></p>
-</div></section>
-<script>
-(function(){var sel=document.getElementById("voice-select"),btn=document.getElementById("voice-play"),meta=document.getElementById("voice-meta"),bar=document.getElementById("voice-progress"),a=new Audio(),list=[];
-var P='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>',S='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>';
-function show(){var v=list[sel.selectedIndex];if(!v)return;meta.textContent=[v.gender,v.languages,v.style].filter(Boolean).join("  ·  ");}
-fetch("data/voices.json",{cache:"no-cache"}).then(function(r){return r.json()}).then(function(d){list=d.voices||[];sel.innerHTML=list.map(function(v,i){return '<option value="'+i+'">'+v.name+(v.gender?" — "+v.gender:"")+'</option>'}).join("");show();});
-sel.addEventListener("change",function(){a.pause();a.removeAttribute("src");bar.style.width="0";show();btn.click();});
-btn.addEventListener("click",function(){var v=list[sel.selectedIndex];if(!v)return;if(!a.src||a.src.indexOf(v.src)<0){a.src=v.src;}
-if(a.paused){document.querySelectorAll("video,audio").forEach(function(m){m.pause()});a.play();}else a.pause();});
-a.addEventListener("play",function(){btn.innerHTML=S;btn.classList.add("on")});a.addEventListener("pause",function(){btn.innerHTML=P;btn.classList.remove("on")});
-a.addEventListener("ended",function(){btn.innerHTML=P;btn.classList.remove("on");bar.style.width="0"});
-a.addEventListener("timeupdate",function(){bar.style.width=(a.currentTime/(a.duration||1)*100)+"%"});})();
-</script>
-""" + FOOT
-
 PAGES["work.html"] = lambda: head("Portfolio: Hindi Dubbing & Voice-Over Samples | SmokyDuck Studio – Indic & Global Multimedia Localization",
     "Watch and listen: Hindi dubbing, animation dubbing, commercials and narration by the SmokyDuck Studio team.", "work.html") + nav("work.html") + \
     pagehead("Portfolio", "Featured <em>Projects.</em>", "Hindi dubbing, animation, commercials and narration by our team. Real voices, real projects.") + """
-<section class="sec" style="padding-top:80px"><div class="wrap"><div data-work="all"></div></div></section>
+<section class="sec" style="padding-top:80px"><div class="wrap"><div data-work="all"></div>
+<p class="rv" style="margin-top:72px;text-align:center"><a class="btn" href="https://drive.google.com/drive/folders/1brroOrcgjQAq9oTcISWgFzOkKJaJQJRE" target="_blank" rel="noopener">See more work →</a></p></div></section>
 """ + FOOT
 
 NEEDS = ["Voice-over (human)", "Dubbing (human)", "Translation", "Subtitling", "AI services", "Something else"]

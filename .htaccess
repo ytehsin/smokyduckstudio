@@ -1,0 +1,14 @@
+# SmokyDuck Studio — Apache (Hostinger) settings
+ErrorDocument 404 /404.html
+Options -Indexes
+# keep internal notes/tools private
+RedirectMatch 404 ^/(_tools|_guides)(/|$)
+# https: turn on 'Force HTTPS' in hPanel after the free SSL is installed
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType text/css "access plus 7 days"
+ExpiresByType application/javascript "access plus 7 days"
+ExpiresByType video/mp4 "access plus 30 days"
+ExpiresByType image/jpeg "access plus 30 days"
+ExpiresByType image/png "access plus 30 days"
+</IfModule>
